@@ -9,7 +9,7 @@ for which a new license (GPL+exception) is in place.
 #include "selection.h"
 #include "util_math.h"
 #include "commonstrings.h"
-#include "../formatidlist.h"
+// #include "../formatidlist.h"
 #include "loadsaveplugin.h"
 #include "ui/propertiespalette.h"
 #include "ui/propertiespalette_text.h"
