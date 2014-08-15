@@ -18,6 +18,18 @@ and, then, rerun cmake with the
 
 option.
 
+## Python 3
+
+To compile against Python 3, you will need to edit the `CMakeLists.txt` in the top-level scribus directory. Change the following line
+
+    FIND_PACKAGE(PythonLibs 2 REQUIRED)
+
+to
+
+    FIND_PACKAGE(PythonLibs REQUIRED)
+
+and re-run cmake.
+
 ## Notes
 
 The error happens in:
