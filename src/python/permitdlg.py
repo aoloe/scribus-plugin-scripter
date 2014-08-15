@@ -11,7 +11,7 @@ XXX: Perhaps refactor some external functionality into this module
 """
 from __future__ import print_function
 
-from PyQt4.QtCore import pyqtSignature
+from PyQt4.QtCore import pyqtSlot
 from PyQt4.QtGui import QDialog, QApplication
 
 from permitdlg_ui import Ui_PermitDialog
@@ -45,7 +45,7 @@ class PermitDialog(QDialog):
         self.resize(self.width(), self.sizeHint().height())
 
     
-    @pyqtSignature("")
+    @pyqtSlot()
     def on_allowButton_clicked(self):
         if self.ui.rememberCheck.isChecked():
             self.done(-1)
@@ -53,7 +53,7 @@ class PermitDialog(QDialog):
             self.done(1)
 
         
-    @pyqtSignature("")
+    @pyqtSlot()
     def on_denyButton_clicked(self):
         if self.ui.rememberCheck.isChecked():
             self.done(-2)
@@ -61,7 +61,7 @@ class PermitDialog(QDialog):
             self.done(2)
 
 
-    @pyqtSignature("")
+    @pyqtSlot()
     def on_detailsButton_clicked(self):
         self.ui.problemsBrowser.setVisible(self.ui.detailsButton.isChecked())
         self.resize(self.width(), self.sizeHint().height())

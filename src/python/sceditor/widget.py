@@ -12,7 +12,7 @@ sys.path.insert(0, os.path.join(path, "rope.zip"))
 from rope.base.project import get_no_project
 from rope.contrib.codeassist import code_assist
 
-from PyQt4.QtCore import QCoreApplication, QLine, Qt, SIGNAL
+from PyQt4.QtCore import QCoreApplication, QLine, Qt
 from PyQt4.QtGui import (QTextCursor, QBrush, QFont, QPainter, QVBoxLayout, 
                          QApplication, QKeyEvent, QTextBlockUserData, QPen, QPlainTextEdit, 
                          QHBoxLayout, QPalette, QColor, QFrame, QWidget, QMessageBox)
@@ -124,8 +124,7 @@ class EditorView(QPlainTextEdit):
         self.highlight_line = True
         self.highlight_color = self.palette().highlight().color().light(175)
         self.highlight_brush = QBrush(QColor(self.highlight_color))
-        self.connect(self, SIGNAL("cursorPositionChanged()"), 
-                        self.onCursorPositionChanged)
+        self.cursorPositionChanged.connect(self.onCursorPositionChanged)
         self.indenter = indenter(RopeEditorWrapper(self))
         # True if you want to catch Emacs keys in actions
         self.disable_shortcuts = False
@@ -212,7 +211,7 @@ class EditorView(QPlainTextEdit):
                 self.highline(cursor)
         if col != self.last_col:
             self.last_col = col
-        self.emit(SIGNAL("cursorPositionChanged(int,int)"), row, col)
+        self.cursorPositionChanged.emit(row, col)
 
 
     def _create_line(self):
@@ -362,12 +361,8 @@ class EditorSidebar(QWidget):
         #self.setPalette(pal)
         self.setBackgroundRole(QPalette.Base)
 
-        self.connect(self.doc().documentLayout(),
-                     SIGNAL("update(const QRectF &)"),
-                     self.update)
-        self.connect(self.view.verticalScrollBar(),
-                     SIGNAL("valueChanged(int)"),
-                     self.update)
+        self.doc().documentLayout().update.connect(self.update)
+        self.view.verticalScrollBar().valueChanged.connect(self.update)
         self.first_row = self.last_row = self.rows = 0
         width = 10
         if self.show_line_numbers:

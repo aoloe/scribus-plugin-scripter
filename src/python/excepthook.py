@@ -10,7 +10,7 @@ import sys
 import cgitb
 import atexit
 
-from PyQt4.QtCore import pyqtSignature, Qt
+from PyQt4.QtCore import pyqtSlot, Qt
 from PyQt4.QtGui import QDialog, QApplication
 
 from excepthook_ui import Ui_ExceptHookDialog
@@ -69,12 +69,12 @@ class ExceptHookDialog(QDialog):
         self.resize(self.sizeHint())
 
 
-    @pyqtSignature("")
+    @pyqtSlot()
     def on_closeButton_clicked(self):
         self.close()
 
 
-    @pyqtSignature("")
+    @pyqtSlot()
     def on_detailsButton_clicked(self):
         self.showExtension(self.ui.detailsButton.isChecked())
 

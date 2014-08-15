@@ -4,7 +4,7 @@
 # The code is distributed under GPL 2 or any later version
 import os
 
-from PyQt4.QtCore import QPoint, QSize, Qt, QRect, SIGNAL, QTimer
+from PyQt4.QtCore import QPoint, QSize, Qt, QRect, QTimer
 from PyQt4.QtGui import (QAbstractButton, QMainWindow, QComboBox, QStyle, 
                          QPainter, QPushButton, QDockWidget, QApplication, QStylePainter, 
                          QIcon, QHBoxLayout, QStyleOptionToolButton, QWidget, 
@@ -90,26 +90,24 @@ class DockWidgetTitleBar(QWidget):
         self.floatButton = DockWidgetTitleBarButton(self)
         self.floatButton.setIcon(q.style().standardIcon(
             QStyle.SP_TitleBarNormalButton, None, q))
-        self.connect(self.floatButton, SIGNAL("clicked()"),
-                     self.toggleFloating)
+        self.floatButton.clicked.connect(self.toggleFloating)
         self.floatButton.setVisible(True)
         self.closeButton = DockWidgetTitleBarButton(self)
         self.closeButton.setIcon(q.style().standardIcon(
             QStyle.SP_TitleBarCloseButton, None, q))
-        self.connect(self.closeButton, SIGNAL("clicked()"), dockWidget.close)
+        self.closeButton.clicked.connect(dockWidget.close)
         self.closeButton.setVisible(True)
         self.collapseButton = DockWidgetTitleBarButton(self)
         self.collapseButton.setIcon(self.openIcon)
-        self.connect(self.collapseButton, SIGNAL("clicked()"),
-                     self.toggleCollapsed)
+        self.collapseButton.clicked.connect(self.toggleCollapsed)
         self.collapseButton.setVisible(True)
         self.pinButton = DockWidgetTitleBarButton(self)
         self.pinButton.setIcon(self.pinIcon)
         self.pinButton.setCheckable(True)
         self.pinButton.setChecked(True)
-        self.connect(self.pinButton, SIGNAL("clicked(bool)"), self.togglePinned)
+        self.pinButton.clicked.connect(self.togglePinned)
         self.pinButton.setVisible(True)
-        self.connect(dockWidget, SIGNAL("featuresChanged(QDockWidget.DockWidgetFeatures)"), self.featuresChanged)
+        dockWidget.featuresChanged.connect(self.featuresChanged)
         self.featuresChanged(0)
 
 

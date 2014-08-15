@@ -1,4 +1,4 @@
-from PyQt4.QtCore import pyqtSignature, Qt
+from PyQt4.QtCore import pyqtSlot, Qt
 from PyQt4.QtGui import QMainWindow, QSplitter, QTabWidget, QApplication, QFileDialog, QMessageBox, QCloseEvent
 
 from widget import PythonEditorWidget,  QtScriptEditorWidget, SaveDialog
@@ -22,7 +22,7 @@ class EditorMainWindow(QMainWindow):
         QMainWindow.__init__(self, parent)
         self.ui = Ui_ScriptEditor()
         self.ui.setupUi(self)
-        #self.connect(self.ui.actionExit, SIGNAL("triggered()"), self.exit)
+        #self.ui.actionExit.triggered.connect(self.exit)
         self.splitter = QSplitter(Qt.Vertical, self)
         self.setCentralWidget(self.splitter)
         self.edit_tab = QTabWidget(self.splitter)
@@ -34,7 +34,7 @@ class EditorMainWindow(QMainWindow):
         self.editors = []
         self.on_actionNewPython_triggered()
 
-    @pyqtSignature("")
+    @pyqtSlot()
     def closeEvent(self, event):
 	while(self.editors.__len__()):
 	    edit = self.edit_tab.currentWidget()
@@ -57,7 +57,7 @@ class EditorMainWindow(QMainWindow):
 
 	
 
-    @pyqtSignature("")
+    @pyqtSlot()
     def on_actionExit_triggered(self):
 	while(self.editors.__len__()):
 	    edit = self.edit_tab.currentWidget()
@@ -76,7 +76,7 @@ class EditorMainWindow(QMainWindow):
                 self.editors.remove(edit)
 	self.close()
 
-    @pyqtSignature("")
+    @pyqtSlot()
     def on_actionNewPython_triggered(self):
         pyedit = PythonEditorWidget(self.edit_tab)
         pyedit.setPlainText(template_py)
@@ -89,7 +89,7 @@ class EditorMainWindow(QMainWindow):
         pyedit.view.setFocus()
 
 
-    @pyqtSignature("")
+    @pyqtSlot()
     def on_actionNewQtScript_triggered(self):
         jsedit = QtScriptEditorWidget(self.edit_tab)
         self.edit_tab.addTab(jsedit, "QtScript")
@@ -99,7 +99,7 @@ class EditorMainWindow(QMainWindow):
         self.console_tab.setCurrentIndex(1)
 
 
-    @pyqtSignature("")
+    @pyqtSlot()
     def on_actionClose_triggered(self):
         edit = self.edit_tab.currentWidget()
         if edit:
@@ -117,19 +117,19 @@ class EditorMainWindow(QMainWindow):
             self.editors.remove(edit)
 
         
-    @pyqtSignature("")
+    @pyqtSlot()
     def on_actionClear_triggered(self):
         #edit = self.edit_tab.currentWidget()
 	#edit.setPlainText(template_py)
 	self.py_console.clear()
 
 
-    @pyqtSignature("")
+    @pyqtSlot()
     def on_actionSave_As_triggered(self):
 	self.save()
 
 
-    @pyqtSignature("")
+    @pyqtSlot()
     def on_actionSave_triggered(self):
 	self.save(True)
 
@@ -155,7 +155,7 @@ class EditorMainWindow(QMainWindow):
 	edit.setModified(False)
 
 
-    @pyqtSignature("")
+    @pyqtSlot()
     def on_actionOpen_triggered(self):
 	filename = QFileDialog.getOpenFileName(self,"Open File","","*.spy")
 	try:
@@ -170,12 +170,12 @@ class EditorMainWindow(QMainWindow):
 	fil.close()
 
 
-    @pyqtSignature("")
+    @pyqtSlot()
     def on_actionRun_triggered(self):
         self.run()
 
 
-    @pyqtSignature("")
+    @pyqtSlot()
     def on_actionRunConsole_triggered(self):
         self.run(True)
 

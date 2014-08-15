@@ -11,7 +11,7 @@ from __future__ import (print_function, with_statement)
 import sip
 from PyQt4.QtCore import (
     QMetaObject, Q_RETURN_ARG, QString, Q_ARG,  
-    QObject, QVariant, Qt, SIGNAL, QMetaMethod)
+    QObject, QVariant, Qt, QMetaMethod)
 from PyQt4.QtGui import QBrush, QFont, QPixmap, qApp, QImage, QPalette
 
 
@@ -232,11 +232,11 @@ class PyQtClass(object):
 
 
     def connect(self, signal, slot):
-        self._instance.connect(self._instance, SIGNAL(signal), slot)
+        getattr(self._instance, signal).connect(slot)
 
 
     def disconnect(self, signal, slot):
-        self._instance.disconnect(self._instance, SIGNAL(signal), slot)
+        getattr(self._instance, signal).disconnect(slot)
 
 
     def parent(self):
