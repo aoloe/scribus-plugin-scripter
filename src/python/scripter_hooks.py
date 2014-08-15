@@ -4,7 +4,7 @@ This module will be a collection of functions to hook into the GUI of Scribus.
 
 Currently it only provides functions to add items to a menubar.
 Support for the toolbar, statusbar and dockarea have still to be implemented.
-I have to think about how to provide this stuff to QtScript.
+I have to think about how to provide this stuff to QtQml.
 """
 
 from PyQt5.QtWidgets import QApplication, QMenu

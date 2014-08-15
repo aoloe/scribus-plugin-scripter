@@ -9,12 +9,12 @@ from PyQt5.QtGui import QTextCursor
 from PyQt5.QtWidgets import qApp, QApplication, QPlainTextEdit
 
 
-from highlighter import PythonHighlighter,  QtScriptHighlighter
+from highlighter import PythonHighlighter,  QtQmlHighlighter
 
 
 
 
-from PyQt5.QtScript import (
+from PyQt5.QtQml import (
     QScriptEngine, QScriptValue, QScriptValueIterator)
 
 
@@ -306,7 +306,7 @@ class PythonConsole(ConsoleWidget):
 
 
 
-class QtScriptInterpreter(object):
+class QtQmlInterpreter(object):
 
 
     def __init__(self, locals):
@@ -429,7 +429,7 @@ js_words = [
 
 
 
-class QtScriptCompleter(object):
+class QtQmlCompleter(object):
 
 
     def __init__(self, engine):
@@ -475,12 +475,12 @@ class QtScriptCompleter(object):
 
 
 
-class QtScriptConsole(ConsoleWidget):
+class QtQmlConsole(ConsoleWidget):
 
 
     def __init__(self, parent=None, namespace=None):
         ConsoleWidget.__init__(self, parent, ps1=">>> ", ps2="... ")
-        self.highlighter = QtScriptHighlighter(self)
+        self.highlighter = QtQmlHighlighter(self)
         namespace = namespace or {}
         def console_print(context, engine):
             for i in range(context.argumentCount()):
@@ -504,8 +504,8 @@ class QtScriptConsole(ConsoleWidget):
         try:
             namespace["Scripter"] = Scripter.qt
         except: pass
-        self.inter = QtScriptInterpreter(namespace)
-        self.completer = QtScriptCompleter(self.inter.engine)
+        self.inter = QtQmlInterpreter(namespace)
+        self.completer = QtQmlCompleter(self.inter.engine)
 
 
 
@@ -516,7 +516,7 @@ class QtScriptConsole(ConsoleWidget):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    o = QtScriptConsole() 
+    o = QtQmlConsole()
     #o = PythonConsole()
     o.resize(640,480)
     o.attach()

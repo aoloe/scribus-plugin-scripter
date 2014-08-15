@@ -16,11 +16,11 @@ except ImportError:
     print("On Ubuntu and Debian(-like) distributions you have to install python-qt5", file=sys.stderr)
     raise
 try:
-    from PyQt5 import QtScript
+    from PyQt5 import QtQml
 except ImportError as e:
-    print("You seem to have Qt5 bindings without QtScript support.", file=sys.stderr)
+    print("You seem to have Qt5 bindings without QtQml support.", file=sys.stderr)
     print("This is currently a requirement.", file=sys.stderr)
-    print("Please make sure you have also libqt5-script installed.", file=sys.stderr)
+    print("Please make sure you have also libqt5-qml installed.", file=sys.stderr)
     raise
 
 # Shows nice looking error dialog if an unhandled exception occures.

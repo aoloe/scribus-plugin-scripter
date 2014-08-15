@@ -21,7 +21,7 @@ from PyQt5.QtWidgets import (QApplication, QFrame, QHBoxLayout, QMessageBox,
 from indenter import PythonCodeIndenter
 from assist import AutoComplete, CallTip
 
-from highlighter import PythonHighlighter,  QtScriptHighlighter
+from highlighter import PythonHighlighter,  QtQmlHighlighter
 
 
 
@@ -436,11 +436,11 @@ class EditorWidget(QFrame):
 class PythonEditorWidget(EditorWidget):
     pass
 
-class QtScriptEditorWidget(QPlainTextEdit):
+class QtQmlEditorWidget(QPlainTextEdit):
     
     def __init__(self,  parent):
         QPlainTextEdit.__init__(self,  parent)
-        self.highlighter = QtScriptHighlighter(self)
+        self.highlighter = QtQmlHighlighter(self)
 
 class SaveDialog(QMessageBox):
 

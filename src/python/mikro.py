@@ -265,7 +265,7 @@ class PyQtClass(object):
 
 
     def __getattr__(self, name):
-        # Make named child objects available as attributes like QtScript
+        # Make named child objects available as attributes like QtQml
         for child in self._instance.children():
             if str(child.objectName()) == name:
                 obj = wrap(child)

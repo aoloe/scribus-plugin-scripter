@@ -3,8 +3,8 @@ from PyQt5.QtGui import QCloseEvent
 from PyQt5.QtWidgets import (QApplication, QFileDialog, QMainWindow,
                              QMessageBox, QSplitter, QTabWidget)
 
-from widget import PythonEditorWidget,  QtScriptEditorWidget, SaveDialog
-from console import PythonConsole, QtScriptConsole
+from widget import PythonEditorWidget,  QtQmlEditorWidget, SaveDialog
+from console import PythonConsole, QtQmlConsole
 from mainwindow_ui import Ui_ScriptEditor
 
 
@@ -31,8 +31,8 @@ class EditorMainWindow(QMainWindow):
         self.console_tab = QTabWidget(self.splitter)
         self.py_console = PythonConsole(self.console_tab)
         self.console_tab.addTab(self.py_console, "&Python console")
-        self.js_console = QtScriptConsole(self.console_tab)
-        self.console_tab.addTab(self.js_console, "&QtScript console")
+        self.js_console = QtQmlConsole(self.console_tab)
+        self.console_tab.addTab(self.js_console, "&QtQml console")
         self.editors = []
         self.on_actionNewPython_triggered()
 
@@ -92,9 +92,9 @@ class EditorMainWindow(QMainWindow):
 
 
     @pyqtSlot()
-    def on_actionNewQtScript_triggered(self):
-        jsedit = QtScriptEditorWidget(self.edit_tab)
-        self.edit_tab.addTab(jsedit, "QtScript")
+    def on_actionNewQtQml_triggered(self):
+        jsedit = QtQmlEditorWidget(self.edit_tab)
+        self.edit_tab.addTab(jsedit, "QtQml")
         self.edit_tab.setCurrentWidget(jsedit)
         self.editors.append(jsedit)
         self.js_console.attach()

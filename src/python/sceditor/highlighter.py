@@ -151,7 +151,7 @@ class PythonHighlighter(QtGui.QSyntaxHighlighter):
         self.setDocument(self.document)
 
 
-class QtScriptHighlighter(PythonHighlighter):
+class QtQmlHighlighter(PythonHighlighter):
 
     keywords = """"
         break  	for  	throw case 	function 	try
@@ -184,7 +184,7 @@ class QtScriptHighlighter(PythonHighlighter):
         
         self.rules.append((QtCore.QRegExp(r"//[^\n]*"), self.singleLineCommentFormat))
         
-        # XXX quick hack to support QtScript syntax
+        # XXX quick hack to support QtQml syntax
         self.multiLineStringBegin = QtCore.QRegExp(r'/\*')
         self.multiLineStringEnd = QtCore.QRegExp(r'\*/')
         self.multiLineStringFormat = self.singleLineCommentFormat
