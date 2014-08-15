@@ -5,7 +5,7 @@
 ## menu = Scripter
 import os
 from PyQt5.QtCore import *
-from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
 
 from scribusscript import load_filename
 from excepthook import show_current_error

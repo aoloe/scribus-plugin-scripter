@@ -13,9 +13,10 @@ from rope.base.project import get_no_project
 from rope.contrib.codeassist import code_assist
 
 from PyQt5.QtCore import QCoreApplication, QLine, Qt
-from PyQt5.QtGui import (QTextCursor, QBrush, QFont, QPainter, QVBoxLayout, 
-                         QApplication, QKeyEvent, QTextBlockUserData, QPen, QPlainTextEdit, 
-                         QHBoxLayout, QPalette, QColor, QFrame, QWidget, QMessageBox)
+from PyQt5.QtGui import (QBrush, QColor, QFont, QKeyEvent, QTextBlockUserData,
+                         QTextCursor, QPainter, QPalette, QPen)
+from PyQt5.QtWidgets import (QApplication, QFrame, QHBoxLayout, QMessageBox,
+                             QPlainTextEdit, QVBoxLayout, QWidget)
 
 from indenter import PythonCodeIndenter
 from assist import AutoComplete, CallTip

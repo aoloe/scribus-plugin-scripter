@@ -11,7 +11,7 @@ import cgitb
 import atexit
 
 from PyQt5.QtCore import pyqtSlot, Qt
-from PyQt5.QtGui import QDialog, QApplication
+from PyQt5.QtWidgets import QApplication, QDialog
 
 from excepthook_ui import Ui_ExceptHookDialog
 

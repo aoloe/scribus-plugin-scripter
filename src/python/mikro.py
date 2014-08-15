@@ -12,7 +12,8 @@ import sip
 from PyQt5.QtCore import (
     QMetaObject, Q_RETURN_ARG, QString, Q_ARG,  
     QObject, QVariant, Qt, QMetaMethod)
-from PyQt5.QtGui import QBrush, QFont, QPixmap, qApp, QImage, QPalette
+from PyQt5.QtGui import QBrush, QFont, QImage, QPalette, QPixmap
+from PyQt5.QtWidgets import qApp
 
 
 variant_converter = {

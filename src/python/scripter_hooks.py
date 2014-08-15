@@ -7,7 +7,7 @@ Support for the toolbar, statusbar and dockarea have still to be implemented.
 I have to think about how to provide this stuff to QtScript.
 """
 
-from PyQt5.QtGui import QApplication,  QMenu
+from PyQt5.QtWidgets import QApplication, QMenu
 
 import mikro
 

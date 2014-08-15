@@ -12,7 +12,7 @@ from ConfigParser import ConfigParser
 
 import sip
 from PyQt5.QtCore import QThread, QObject, QVariant
-from PyQt5.QtGui import qApp,  QMessageBox
+from PyQt5.QtWidgets import qApp, QMessageBox
 from PyQt5.QtScript import QScriptEngine, QScriptValue
 
 from safe_eval import checkCode

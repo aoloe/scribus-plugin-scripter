@@ -12,7 +12,7 @@ XXX: Perhaps refactor some external functionality into this module
 from __future__ import print_function
 
 from PyQt5.QtCore import pyqtSlot
-from PyQt5.QtGui import QDialog, QApplication
+from PyQt5.QtWidgets import QDialog, QApplication
 
 from permitdlg_ui import Ui_PermitDialog
 

@@ -2,7 +2,6 @@
 ## menu = &Help
 ## separator_before = True
 from PyQt5.QtCore import *
-from PyQt5.QtGui import *
 
 URL = "http://scribus-scripter.readthedocs.org"
 

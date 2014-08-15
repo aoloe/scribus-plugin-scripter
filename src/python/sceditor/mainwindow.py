@@ -1,5 +1,7 @@
 from PyQt5.QtCore import pyqtSlot, Qt
-from PyQt5.QtGui import QMainWindow, QSplitter, QTabWidget, QApplication, QFileDialog, QMessageBox, QCloseEvent
+from PyQt5.QtGui import QCloseEvent
+from PyQt5.QtWidgets import (QApplication, QFileDialog, QMainWindow,
+                             QMessageBox, QSplitter, QTabWidget)
 
 from widget import PythonEditorWidget,  QtScriptEditorWidget, SaveDialog
 from console import PythonConsole, QtScriptConsole

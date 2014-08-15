@@ -5,7 +5,8 @@ import traceback
 import re
 
 from PyQt5.QtCore import QObject, Qt
-from PyQt5.QtGui import QTextCursor, qApp, QApplication, QPlainTextEdit
+from PyQt5.QtGui import QTextCursor
+from PyQt5.QtWidgets import qApp, QApplication, QPlainTextEdit
 
 
 from highlighter import PythonHighlighter,  QtScriptHighlighter

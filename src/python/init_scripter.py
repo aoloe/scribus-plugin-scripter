@@ -9,7 +9,7 @@ print("%s added to PYTHONPATH" % scripter_path, file=sys.stderr)
 # Look for PyQt
 try:
     from PyQt5.QtCore import PYQT_VERSION_STR,  QObject,  QCoreApplication
-    from PyQt5.QtGui import qApp,  QMenu
+    from PyQt5.QtWidgets import qApp, QMenu
 except ImportError:
     print("Python cannot find the Qt5 bindings.", file=sys.stderr)
     print("Please make sure, that the needed packages are installed.", file=sys.stderr)

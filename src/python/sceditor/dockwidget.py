@@ -5,10 +5,11 @@
 import os
 
 from PyQt5.QtCore import QPoint, QSize, Qt, QRect, QTimer
-from PyQt5.QtGui import (QAbstractButton, QMainWindow, QComboBox, QStyle, 
-                         QPainter, QPushButton, QDockWidget, QApplication, QStylePainter, 
-                         QIcon, QHBoxLayout, QStyleOptionToolButton, QWidget, 
-                         QStyleOptionDockWidgetV2, QLayout)
+from PyQt5.QtGui import (QIcon, QPainter)
+from PyQt5.QtWidgets import (QAbstractButton, QApplication, QComboBox,
+                             QDockWidget, QHBoxLayout, QLayout, QMainWindow,
+                             QPushButton, QStyle, QStyleOptionDockWidget,
+                             QStyleOptionToolButton, QStylePainter, QWidget)
 
 
 import dockwidget_icons
@@ -150,7 +151,7 @@ class DockWidgetTitleBar(QWidget):
             fw = 1 or q.isFloating() and q.style().pixelMetric(
                 QStyle.PM_DockWidgetFrameWidth, None, q) or 0
             mw = q.style().pixelMetric(QStyle.PM_DockWidgetTitleMargin, None, q)
-            titleOpt = QStyleOptionDockWidgetV2()
+            titleOpt = QStyleOptionDockWidget()
             titleOpt.initFrom(q)
             titleOpt.verticalTitleBar = True
             titleOpt.rect = QRect(
@@ -168,7 +169,7 @@ class DockWidgetTitleBar(QWidget):
             fw = q.isFloating() and q.style().pixelMetric(
                 QStyle.PM_DockWidgetFrameWidth, None, q) or 0
             mw = q.style().pixelMetric(QStyle.PM_DockWidgetTitleMargin, None, q)
-            titleOpt = QStyleOptionDockWidgetV2()
+            titleOpt = QStyleOptionDockWidget()
             titleOpt.initFrom(q)
             titleOpt.rect = QRect(
                 QPoint(fw + mw + \
@@ -188,7 +189,7 @@ class DockWidgetTitleBar(QWidget):
         if hasFeature(q, QDockWidget.DockWidgetVerticalTitleBar):
             fh = q.isFloating() and q.style().pixelMetric(
                 QStyle.PM_DockWidgetFrameWidth, None, q) or 0
-            opt = QStyleOptionDockWidgetV2()
+            opt = QStyleOptionDockWidget()
             opt.initFrom(q)
             opt.verticalTitleBar = True
             opt.rect = QRect(
@@ -224,7 +225,7 @@ class DockWidgetTitleBar(QWidget):
         else:
             fw = q.isFloating() and q.style().pixelMetric(
                 QStyle.PM_DockWidgetFrameWidth, None, q) or 0
-            opt = QStyleOptionDockWidgetV2()
+            opt = QStyleOptionDockWidget()
             opt.initFrom(q)
             opt.rect = QRect(
                 QPoint(fw, fw),
