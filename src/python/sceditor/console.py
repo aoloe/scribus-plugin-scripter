@@ -183,7 +183,7 @@ class PythonInterpreter(object):
         try:
             code = compile(line, self.name, "single")
             self.lines = []
-        except SyntaxError, why:
+        except SyntaxError as why:
             if why[0] == "unexpected EOF while parsing":
                 self.lines.append(line)
                 return 1 # want more!

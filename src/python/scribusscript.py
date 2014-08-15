@@ -37,8 +37,8 @@ def validate_regex(pattern):
         found = re.match(pattern, value)
         if found:
             return found.group(0)
-        raise ValidationError, \
-             "Value %r does not match regular expression pattern %r" % pattern
+        raise ValidationError(
+             "Value %r does not match regular expression pattern %r" % pattern)
     return check
 
 
@@ -52,15 +52,15 @@ def validate_list(value):
 def validate_intlist(value):
     try:
         return [int(v) for v in validate_list(value)]
-    except ValueError, e:
-        raise ValidationError, "Int-validation error: %s" % e
+    except ValueError as e:
+        raise ValidationError("Int-validation error: %s" % e)
 
 
 def validate_enum(*args):
     def check(value):
         if value.lower() in args:
             return value.lower()
-        raise ValidationError, "%r not in %r" % (value, args)
+        raise ValidationError("%r not in %r" % (value, args))
     return check
 
 
@@ -92,7 +92,7 @@ class Item(object):
     def __call__(self, value, ignore_errors=False):
         try:
             pyvalue = self.validate(value)
-        except ValidationError, e:
+        except ValidationError as e:
             if not ignore_errors:
                 raise
             pyvalue = self.default
@@ -144,7 +144,7 @@ class ScribusScript(object):
         for item in self.__class__.items:
             self.data[item.name] = d.pop(item.name, item.default)
         if d:
-            raise TypeError, "Unknown items: %s" % ", ".join(d.keys())
+            raise TypeError("Unknown items: %s" % ", ".join(d.keys()))
 
 
     def __repr__(self):
@@ -268,14 +268,14 @@ class ScribusScript(object):
         for item in cls.items:
             if not item.name in options:
                 if item.required:
-                    raise ValidationError, "Option %r required but not set" % item.name
+                    raise ValidationError("Option %r required but not set" % item.name)
                 else:
                     continue
             options.remove(item.name)
             value = cfg.get("ScribusScript", item.name)
             data[item.name] = item(value)
         if options:
-            raise ValidationError, "Invalid options found: %s" % ", ".join(options)
+            raise ValidationError("Invalid options found: %s" % ", ".join(options))
         
         return cls(**data)
 

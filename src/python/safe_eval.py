@@ -320,7 +320,7 @@ def checkCode(code):
     
     try:
         ast = compiler.parse(code)
-    except SyntaxError, e:
+    except SyntaxError as e:
         return [e]
     checker = SafeEvalVisitor()
 

@@ -71,7 +71,7 @@ def from_variant(variant):
     typeName = variant.typeName()
     convert = variant_converter.get(typeName)
     if not convert:
-        raise ValueError, "Could not convert value to %s" % typeName
+        raise ValueError("Could not convert value to %s" % typeName)
     else: 
         return convert(variant)
 
@@ -258,8 +258,8 @@ class PyQtClass(object):
                 # array protocol
                 try:
                     return getattr(self, str(key))
-                except AttributeError, e:
-                    raise IndexError, key
+                except AttributeError as e:
+                    raise IndexError(key)
             else:
                 return self.children()[key]
         else:
@@ -278,7 +278,7 @@ class PyQtClass(object):
         variant = self._instance.property(name)
         if variant.type() != 0:
             return from_variant(variant)
-        raise AttributeError, name
+        raise AttributeError(name)
 
 
     @property
@@ -373,10 +373,10 @@ class PyQtMethod(object):
                 if error_msg:
                     # clear message
                     qApp.setProperty("MIKRO_EXCEPTION", QVariant())
-                    raise Error(error_msg)
-            except RuntimeError, e:
-                raise TypeError, \
-                    "%s.%s(%r) call failed: %s" % (obj, self.name, args, e)
+                    raise Exception(error_msg)
+            except RuntimeError as e:
+                raise TypeError(
+                    "%s.%s(%r) call failed: %s" % (obj, self.name, args, e))
             return wrap(result)
         wrapper.__doc__ = self.__doc__
         return wrapper

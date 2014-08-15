@@ -15,7 +15,7 @@ except ImportError:
     raise
 try:
     from PyQt4 import QtScript
-except ImportError, e:
+except ImportError as e:
     print >> sys.stderr, "You seem to have Qt4 bindings without QtScript support."
     print >> sys.stderr, "This is currently a requirement."
     print >> sys.stderr, "Please make sure you have also libqt4-script installed."
@@ -30,7 +30,7 @@ excepthook.install()
 if float(PYQT_VERSION_STR[:3]) < 4.4:
     print >> sys.stderr, "Your installed PyQt4 is older than version 4.4"
     print >> sys.stderr, "A newer version is needed. Please upgrade your packages."
-    raise ImportError, "PyQt4 not new enough"
+    raise ImportError("PyQt4 not new enough")
 
 # Import helper modules
 from scripter_hooks import MenuHooks

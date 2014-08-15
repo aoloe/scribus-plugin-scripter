@@ -275,7 +275,7 @@ class EditorView(QPlainTextEdit):
             items = code_assist(self.prj,
                                 unicode(self.toPlainText()),
                                 self.textCursor().position())
-        except Exception,  e:
+        except Exception as e:
             items = []
         if items:
             self.autocomplete.setItems(items)
