@@ -101,12 +101,12 @@ class AutoComplete(PopupWidget):
         line = unicode(cursor.block().text())
         i = self.cursor_start_col
         while i > 0:
-            #print `line[i:col]`
+            #print(`line[i:col]`)
             if completition.startswith(line[i:col]):
-                #print "break"
+                #print("break")
                 break
             i -= 1
-        #print col,i
+        #print(col,i)
         cursor.insertText(completition[col-i:])
         self.hide()
 

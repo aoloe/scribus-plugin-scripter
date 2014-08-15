@@ -9,6 +9,8 @@ It only allows a very small subset of Python which is considered safe.
 
 XXX: Perhaps refactor some external functionality into this module
 """
+from __future__ import print_function
+
 from PyQt4.QtCore import pyqtSignature
 from PyQt4.QtGui import QDialog, QApplication
 
@@ -80,4 +82,4 @@ if __name__ == "__main__":
     import safe_eval
     problems = safe_eval.checkCode(open("permitdlg.py").read())
     app = QApplication(sys.argv)
-    print ask("permitdlg.py", problems)
+    print(ask("permitdlg.py", problems))

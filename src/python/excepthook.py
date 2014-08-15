@@ -84,12 +84,12 @@ if __name__ == "__main__":
     # Some tests:
     app = QApplication(sys.argv)
     install()
-    print "Triggering error 1"
+    print("Triggering error 1")
     try:
         fail = 1 / 0
     except:
         show_current_error("Using inside except")
-    print "Triggering error 2"
+    print("Triggering error 2")
     fail2 = 1 / 0
-    print "This will never be reached because excepthook"
-    print "complains about fail2"
+    print("This will never be reached because excepthook")
+    print("complains about fail2")

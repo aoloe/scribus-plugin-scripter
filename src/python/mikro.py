@@ -6,7 +6,8 @@ Via the Qt meta object system it provides access to unwrapped objects.
 This code uses a lot of metaprogramming magic. To fully understand it,
 you have to know about metaclasses in Python
 """
-from __future__ import with_statement
+from __future__ import (print_function, with_statement)
+
 import sip
 from PyQt4.QtCore import (
     QMetaObject, Q_RETURN_ARG, QString, Q_ARG,  
@@ -201,13 +202,13 @@ class PyQtClass(object):
         qobj = self._instance
         if is_scripter_child(qobj):
             if len(qobj.children()):
-                print "Cannot delete", qobj, "because it has child objects"
+                print("Cannot delete", qobj, "because it has child objects")
             #else:
-            #    print "* deleting", qobj
+            #    print("* deleting", qobj)
             # XXX: or better setdeleted ?
             sip.delete(qobj)
         #else:
-        #    print "* NOT deleting", qobj
+        #    print("* NOT deleting", qobj)
 
         
     def setProperty(self, name, value):
@@ -300,11 +301,11 @@ class PyQtClass(object):
 
     
     def __enter__(self):
-        print "__enter__", self
+        print("__enter__", self)
         
         
     def __exit__(self, exc_type, exc_value, traceback):
-        print "__exit__", self, exc_type, exc_value, traceback
+        print("__exit__", self, exc_type, exc_value, traceback)
         
 
 

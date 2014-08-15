@@ -4,6 +4,8 @@ Python and QtScript scripts inside Scribus.
 
 Look at run_filename for details.
 """
+from __future__ import print_function
+
 import os
 import hashlib
 from ConfigParser import ConfigParser
@@ -242,9 +244,9 @@ def cleanup():
         if hasattr(child, "qt"): child = child.qt
         v = child.property("keep")
         if v and v.toBool() == True:
-            #print "Keeping", child
+            #print("Keeping", child)
             continue
-        print "* deleting collected", child
+        print("* deleting collected", child)
         sip.delete(child)
 
 

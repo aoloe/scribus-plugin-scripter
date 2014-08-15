@@ -6,6 +6,8 @@ The idea is to ship Scribus with "signed" scripts which can be safely
 used although they might use unsafe statements. 
 """
 
+from __future__ import print_function
+
 import sys
 import os
 import pprint
@@ -20,7 +22,7 @@ def main(files):
             fn = os.path.join("autoload", name)
             if not os.path.isdir(fn):
                 allowed.append(hash_source(fn))
-    print "allowed_scripts = ",
+    print("allowed_scripts = ", end='')
     pprint.pprint(allowed)
     
     

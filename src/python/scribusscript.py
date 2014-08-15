@@ -5,6 +5,8 @@ shortcuts, etc. Some additional metadata gives useful information and help.
 
 See doc/TUTORIAL for a detailed explanation including examples.
 """
+from __future__ import print_function
+
 import sys
 import re
 import os
@@ -188,9 +190,9 @@ class ScribusScript(object):
                 if os.path.exists(icon_filename):
                     self.action.setIcon(QIcon(icon_filename))
                 else:
-                    print >> sys.stderr, "Icon %r not found" % icon_filename
+                    print("Icon %r not found" % icon_filename, file=sys.stderr)
             if self.shortcut:
-                print >> sys.stdout, "Shortcut %r." % self.shortcut 
+                print("Shortcut %r." % self.shortcut)
                 self.action.setShortcut(QKeySequence(self.shortcut))
 
 
@@ -320,8 +322,8 @@ if __name__ == "__main__":
     # Show script descriptor for given files
     for filename in sys.argv[1:]:
         script = ScribusScript.parse_filename(filename)
-        print filename
-        print script
+        print(filename)
+        print(script)
     if not sys.argv[1:]:
         for sd in load_scripts("."):
-            print sd
+            print(sd)
