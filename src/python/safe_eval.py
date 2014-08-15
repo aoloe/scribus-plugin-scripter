@@ -176,7 +176,7 @@ class SafeEvalError(object):
 
     Attributes:
       errmsg = short decription about the nature of the error
-      lineno = line offset to where error occured in source code
+      lineno = line offset to where error occurred in source code
     """
     def __init__(self, errmsg, lineno):
         self.errmsg, self.lineno = errmsg, lineno
@@ -340,7 +340,7 @@ class SafeEvalException(Exception):
 
 class SafeEvalCodeException(SafeEvalException):
     """
-    Exception class for reporting all errors which occured while
+    Exception class for reporting all errors which occurred while
     validating AST for source code in safe_eval().
 
     Attributes:
