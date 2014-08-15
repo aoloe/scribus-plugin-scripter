@@ -50,9 +50,6 @@ Pythonize::Pythonize ()
         }
 
         if (debug) printf ("Python interpreter initialized!\n\n");
-
-        // free the lock
-        PyEval_ReleaseLock();
     }
 }
 
