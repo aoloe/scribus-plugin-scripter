@@ -10,6 +10,8 @@
 #ifndef API_COLOR_H_
 #define API_COLOR_H_
 
+#include <Python.h>
+
 #include <QObject>
 #include <QtDebug>
 #include <QApplication>

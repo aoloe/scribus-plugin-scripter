@@ -7,6 +7,8 @@
  * for which a new license (GPL+exception) is in place.
  */
 
+#include <Python.h>
+
 #include "api_color.h"
 #include "sccolorengine.h"
 #include "scribusdoc.h"

@@ -16,11 +16,10 @@
    Boston, MA 02110-1301, USA.
 */
 
+#include <Python.h>
+
 #include <stdarg.h>
 #include <string.h>
-
-// this just gets rid of a warning when Python.h redefines it
-#undef _POSIX_C_SOURCE
 
 #include <pythonize.h>
 

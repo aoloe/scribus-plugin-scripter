@@ -7,6 +7,8 @@ for which a new license (GPL+exception) is in place.
 #ifndef CMDUTIL_H
 #define CMDUTIL_H
 
+#include <Python.h>
+
 #include "scripterimpl.h"
 
 double PointToValue(double Val);

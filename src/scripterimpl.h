@@ -7,6 +7,8 @@ for which a new license (GPL+exception) is in place.
 #ifndef SCRIPTERIMPL_H
 #define SCRIPTERIMPL_H
 
+#include <Python.h>
+
 #include <QObject>
 #include <QtDebug>
 
