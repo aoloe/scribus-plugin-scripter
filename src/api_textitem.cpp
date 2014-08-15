@@ -91,7 +91,7 @@ double TextAPI::fontSize()
 		for (int b = 0; b < item->itemText.length(); b++)
 			if (item->itemText.selected(b))
 				return item->itemText.charStyle(b).fontSize() / 10.0;
-		return NULL;
+		return 0.0;
 	}
 	else
 	{
@@ -452,6 +452,7 @@ bool TextAPI::deleteText()
 		//	ScCore->primaryMainWindow()->doc->FrameItems.at(a)->ItemNr = a;
 		//}TODO fix this,
 	}
+	return false; // probably...
 }
 
 bool TextAPI::traceText()

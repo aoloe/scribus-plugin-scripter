@@ -114,7 +114,7 @@ void DocumentAPI::setUnit(int value)
 
 int DocumentAPI::unit()
 {
-	if (!check()) return NULL;
+	if (!check()) return -1;
 	return ScCore->primaryMainWindow()->doc->unitIndex();
 }
 

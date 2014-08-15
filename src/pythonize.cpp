@@ -113,7 +113,7 @@ bool Pythonize::appendToSysPath (const char* newPath)
 {
     if (newPath == NULL || strlen (newPath) == 0) return false;
 
-    char *fmtString = "import sys\nif not '%s' in sys.path:\n\tsys.path.append ('%s')\n"; //print sys.path\n";
+    const char *fmtString = "import sys\nif not '%s' in sys.path:\n\tsys.path.append ('%s')\n"; //print sys.path\n";
     int length      = strlen (fmtString) + 2*strlen (newPath) + 1;
     char *line      =  new char [length];
     if (!line) return false;
