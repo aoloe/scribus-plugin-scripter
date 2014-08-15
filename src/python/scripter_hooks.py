@@ -7,7 +7,7 @@ Support for the toolbar, statusbar and dockarea have still to be implemented.
 I have to think about how to provide this stuff to QtScript.
 """
 
-from PyQt4.QtGui import QApplication,  QMenu
+from PyQt5.QtGui import QApplication,  QMenu
 
 import mikro
 
@@ -53,7 +53,7 @@ class MenuHooks(object):
         @rtype:       QMenu
         @return:      None if no menu was found, else the menu with title
         """
-        # See also http://www.riverbankcomputing.co.uk/static/Docs/PyQt4/pyqt4ref.html#differences-between-pyqt-and-qt
+        # See also http://pyqt.sourceforge.net/Docs/PyQt5/i18n.html#differences-between-pyqt5-and-qt
         title = QApplication.translate(mikro.classname(self.window), title) 
         for menu in self.iter_menus():
             if menu.title() == title:

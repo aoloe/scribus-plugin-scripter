@@ -1,5 +1,5 @@
-from PyQt4.QtCore import QTimer, Qt
-from PyQt4.QtGui import QTextBrowser, QVBoxLayout, QListWidget, qApp, QListWidgetItem, QWidget
+from PyQt5.QtCore import QTimer, Qt
+from PyQt5.QtGui import QTextBrowser, QVBoxLayout, QListWidget, qApp, QListWidgetItem, QWidget
 
 
 class PopupWidget(QWidget):

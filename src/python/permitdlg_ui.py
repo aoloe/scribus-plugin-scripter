@@ -3,11 +3,11 @@
 # Form implementation generated from reading ui file 'permitdlg.ui'
 #
 # Created: Sun Aug 10 16:28:16 2008
-#      by: PyQt4 UI code generator 4.4.2
+#      by: PyQt5 UI code generator 4.4.2
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui
 
 class Ui_PermitDialog(object):
     def setupUi(self, PermitDialog):

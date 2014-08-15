@@ -11,9 +11,9 @@ import hashlib
 from ConfigParser import ConfigParser
 
 import sip
-from PyQt4.QtCore import QThread, QObject, QVariant
-from PyQt4.QtGui import qApp,  QMessageBox
-from PyQt4.QtScript import QScriptEngine, QScriptValue
+from PyQt5.QtCore import QThread, QObject, QVariant
+from PyQt5.QtGui import qApp,  QMessageBox
+from PyQt5.QtScript import QScriptEngine, QScriptValue
 
 from safe_eval import checkCode
 import permitdlg

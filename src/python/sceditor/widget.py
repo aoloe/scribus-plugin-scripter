@@ -12,8 +12,8 @@ sys.path.insert(0, os.path.join(path, "rope.zip"))
 from rope.base.project import get_no_project
 from rope.contrib.codeassist import code_assist
 
-from PyQt4.QtCore import QCoreApplication, QLine, Qt
-from PyQt4.QtGui import (QTextCursor, QBrush, QFont, QPainter, QVBoxLayout, 
+from PyQt5.QtCore import QCoreApplication, QLine, Qt
+from PyQt5.QtGui import (QTextCursor, QBrush, QFont, QPainter, QVBoxLayout, 
                          QApplication, QKeyEvent, QTextBlockUserData, QPen, QPlainTextEdit, 
                          QHBoxLayout, QPalette, QColor, QFrame, QWidget, QMessageBox)
 

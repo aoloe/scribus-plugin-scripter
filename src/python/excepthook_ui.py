@@ -3,11 +3,11 @@
 # Form implementation generated from reading ui file 'excepthook.ui'
 #
 # Created: Sun Jun 15 01:19:42 2008
-#      by: PyQt4 UI code generator 4.4.2
+#      by: PyQt5 UI code generator 4.4.2
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui
 
 class Ui_ExceptHookDialog(object):
     def setupUi(self, ExceptHookDialog):

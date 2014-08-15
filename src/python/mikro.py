@@ -9,10 +9,10 @@ you have to know about metaclasses in Python
 from __future__ import (print_function, with_statement)
 
 import sip
-from PyQt4.QtCore import (
+from PyQt5.QtCore import (
     QMetaObject, Q_RETURN_ARG, QString, Q_ARG,  
     QObject, QVariant, Qt, QMetaMethod)
-from PyQt4.QtGui import QBrush, QFont, QPixmap, qApp, QImage, QPalette
+from PyQt5.QtGui import QBrush, QFont, QPixmap, qApp, QImage, QPalette
 
 
 variant_converter = {
@@ -86,11 +86,11 @@ def supercast(obj):
     """
     if not qtclasses:
         # To get really all Qt classes I would have to 
-        # import QtNetwork, QtXml, QtSvg and QtScript, too.
-        import PyQt4
+        # import QtNetwork, QtSvg and QtQml, too.
+        import PyQt5
         qtclasses.update(
             dict([(key, value) \
-                for key, value in PyQt4.QtCore.__dict__.items() + PyQt4.QtGui.__dict__.items() \
+                for key, value in PyQt5.QtCore.__dict__.items() + PyQt5.QtGui.__dict__.items() \
                 if hasattr(value, "__subclasses__") and issubclass(value, QObject)])
         )
     try:

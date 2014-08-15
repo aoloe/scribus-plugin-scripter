@@ -10,8 +10,8 @@ import sys
 import cgitb
 import atexit
 
-from PyQt4.QtCore import pyqtSlot, Qt
-from PyQt4.QtGui import QDialog, QApplication
+from PyQt5.QtCore import pyqtSlot, Qt
+from PyQt5.QtGui import QDialog, QApplication
 
 from excepthook_ui import Ui_ExceptHookDialog
 

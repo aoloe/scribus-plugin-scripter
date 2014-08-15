@@ -4,8 +4,8 @@
 # The code is distributed under GPL 2 or any later version
 import os
 
-from PyQt4.QtCore import QPoint, QSize, Qt, QRect, QTimer
-from PyQt4.QtGui import (QAbstractButton, QMainWindow, QComboBox, QStyle, 
+from PyQt5.QtCore import QPoint, QSize, Qt, QRect, QTimer
+from PyQt5.QtGui import (QAbstractButton, QMainWindow, QComboBox, QStyle, 
                          QPainter, QPushButton, QDockWidget, QApplication, QStylePainter, 
                          QIcon, QHBoxLayout, QStyleOptionToolButton, QWidget, 
                          QStyleOptionDockWidgetV2, QLayout)
@@ -406,7 +406,7 @@ class DockWidget(QDockWidget):
 
 if __name__ == "__main__":
     import sys
-    from PyQt4.QtGui import QTextEdit
+    from PyQt5.QtGui import QTextEdit
     app = QApplication(sys.argv)
     app.setStyle("qtcurve")
     win = QMainWindow()

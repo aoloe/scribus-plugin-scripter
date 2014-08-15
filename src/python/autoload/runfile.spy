@@ -4,8 +4,8 @@
 ## subroutine = run
 ## menu = Scripter
 import os
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 
 from scribusscript import load_filename
 from excepthook import show_current_error

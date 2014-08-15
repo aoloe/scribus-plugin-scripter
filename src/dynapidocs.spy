@@ -2,8 +2,8 @@
 ## title = Create docs of objects inside Scribus
 ## description = generates files with the samee docstring-format
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
 
 
 def inspect(obj, prefix=""):

@@ -4,8 +4,8 @@ import sys
 import traceback
 import re
 
-from PyQt4.QtCore import QObject, Qt
-from PyQt4.QtGui import QTextCursor, qApp, QApplication, QPlainTextEdit
+from PyQt5.QtCore import QObject, Qt
+from PyQt5.QtGui import QTextCursor, qApp, QApplication, QPlainTextEdit
 
 
 from highlighter import PythonHighlighter,  QtScriptHighlighter
@@ -13,7 +13,7 @@ from highlighter import PythonHighlighter,  QtScriptHighlighter
 
 
 
-from PyQt4.QtScript import (
+from PyQt5.QtScript import (
     QScriptEngine, QScriptValue, QScriptValueIterator)
 
 
