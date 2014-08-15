@@ -41,8 +41,8 @@ Pythonize::Pythonize ()
 
     if (!Py_IsInitialized ())
     {
-        PyEval_InitThreads ();
         Py_Initialize ();
+        PyEval_InitThreads ();
         if (!Py_IsInitialized ())
         {
             pythonInit = 0;
