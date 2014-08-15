@@ -10,7 +10,7 @@ from __future__ import (print_function, with_statement)
 
 import sip
 from PyQt5.QtCore import (
-    QMetaObject, Q_RETURN_ARG, QString, Q_ARG,  
+    QMetaObject, Q_RETURN_ARG, Q_ARG,
     QObject, QVariant, Qt, QMetaMethod)
 from PyQt5.QtGui import QBrush, QFont, QImage, QPalette, QPixmap
 from PyQt5.QtWidgets import qApp
@@ -24,7 +24,6 @@ variant_converter = {
   "double": lambda v: v.toDouble()[0],
   "char": lambda v: v.toChar(),
   "QByteArray": lambda v: v.toByteArray(),
-  "QString": lambda v: unicode(v.toString()),
   "QPoint": lambda v: v.toPoint(),
   "QPointF": lambda v: v.toPointF(),
   "QSize": lambda v: v.toSize(),
@@ -120,10 +119,7 @@ def wrap(obj, force=False):
     which queries the metaObject and provides access to 
     all slots and all properties.
     """
-    if isinstance(obj, QString):
-        # prefer Python strings
-        return unicode(obj)
-    elif isinstance(obj, PyQtClass):
+    if isinstance(obj, PyQtClass):
         # already wrapped
         return obj
     if obj and isinstance(obj, QObject):
