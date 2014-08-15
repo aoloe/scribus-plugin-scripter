@@ -79,7 +79,7 @@ class MethodList(QTreeWidget):
             m = mo.method(i)
             if m.access() in [QMetaMethod.Private, QMetaMethod.Protected]:
                 continue
-            name, sig = str(m.signature()).split("(", 1)
+            name, sig = str(m.methodSignature()).split("(", 1)
             if m.methodType() == QMetaMethod.Signal:
                 name += " [SIGNAL]"
             types = [str(t) for t in m.parameterTypes()]

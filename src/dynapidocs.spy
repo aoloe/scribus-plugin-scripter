@@ -21,7 +21,7 @@ def inspect(obj, prefix=""):
         mm = mo.method(i)
         types = [str(t) for t in mm.parameterTypes()]
         names = [str(n) or "arg%i" % (i+1) for i, n in enumerate(mm.parameterNames())]
-        func = str(mm.signature()).split("(", 1)[0]
+        func = str(mm.methodSignature()).split("(", 1)[0]
         out("/**")
         out("*", prefix+func+"(%s)" % ", ".join(names))
         for name, typename in zip(names, types):

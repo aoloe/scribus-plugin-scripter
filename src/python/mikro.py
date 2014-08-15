@@ -340,7 +340,7 @@ class PyQtMethod(object):
 
     def __init__(self, meta_method):
         self.meta_method = meta_method
-        self.name, args = str(meta_method.signature()).split("(", 1)
+        self.name, args = str(meta_method.methodSignature()).split("(", 1)
         self.args = args[:-1].split(",")
         self.returnType = str(meta_method.typeName())
 
