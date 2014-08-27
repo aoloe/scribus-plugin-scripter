@@ -37,6 +37,10 @@ scribus runs correctly.
 
 The next step will to find out which is the offending line.
 
+## Scribus Bug Tracker
+
+- [0011207: Scripter Python 3 compatibility](http://bugs.scribus.net/view.php?id=11207)
+
 ## TODO
 
 - have a look at the patch for porting the older scripter to python 3: http://bugs.scribus.net/view.php?id=11207
