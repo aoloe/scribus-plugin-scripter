@@ -1,6 +1,6 @@
 """
 This runtime module contains everything about running 
-Python and QtScript scripts inside Scribus.
+Python and QtQml scripts inside Scribus.
 
 Look at run_filename for details.
 """
@@ -11,9 +11,9 @@ import hashlib
 from ConfigParser import ConfigParser
 
 import sip
-from PyQt4.QtCore import QThread, QObject, QVariant
-from PyQt4.QtGui import qApp,  QMessageBox
-from PyQt4.QtScript import QScriptEngine, QScriptValue
+from PyQt5.QtCore import QThread, QObject, QVariant
+from PyQt5.QtWidgets import qApp, QMessageBox
+from PyQt5.QtQml import QScriptEngine, QScriptValue
 
 from safe_eval import checkCode
 import permitdlg
@@ -69,7 +69,7 @@ extension_namespace = __main__.__dict__
 
 qts_engine = None
 
-# XXX share namespaces of Python and QtScript
+# XXX share namespaces of Python and QtQml
 
 class QtSRuntimeError(Exception):
     pass
@@ -255,7 +255,7 @@ def run_filename(filename, subroutine=None, extension=False, background=False):
     """
     Call this function to run a script and nothing else. 
     It will do everything for you, including garbage collection
-    for QtScript (very simple implementation, see mark_keep and cleanup).
+    for QtQml (very simple implementation, see mark_keep and cleanup).
     Running as extension uses the __main__ namespace and does not
     delete objects after execution.
     Running in background as a thread is not much tested and 

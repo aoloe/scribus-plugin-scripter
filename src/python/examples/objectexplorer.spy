@@ -4,8 +4,8 @@
 ## shortcut = Esc,o
 ## subroutine = run
 
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQt5.QtCore import *
+from PyQt5.QtWidgets import *
 
 import mikro
 import __main__
@@ -63,9 +63,7 @@ class MethodList(QTreeWidget):
         QTreeWidget.__init__(self, parent)
         self.setColumnCount(3)
         self.setHeaderLabels(["Name", "Return-Type", "Arguments"])
-        self.connect(self,
-                     SIGNAL("itemDoubleClicked(QTreeWidgetItem*, int)"),
-                     self.doubleClicked)
+        self.itemDoubleClicked.connect(self.doubleClicked)
 
 
     def doubleClicked(self, item, col):
@@ -81,7 +79,7 @@ class MethodList(QTreeWidget):
             m = mo.method(i)
             if m.access() in [QMetaMethod.Private, QMetaMethod.Protected]:
                 continue
-            name, sig = str(m.signature()).split("(", 1)
+            name, sig = str(m.methodSignature()).split("(", 1)
             if m.methodType() == QMetaMethod.Signal:
                 name += " [SIGNAL]"
             types = [str(t) for t in m.parameterTypes()]
@@ -150,9 +148,7 @@ class PropertyList(QTreeWidget):
         QTreeWidget.__init__(self, parent)
         self.setColumnCount(3)
         self.setHeaderLabels(["Name", "Value", "Type"])
-        self.connect(self,
-                     SIGNAL("itemDoubleClicked(QTreeWidgetItem*, int)"),
-                     self.doubleClicked)
+        self.itemDoubleClicked.connect(self.doubleClicked)
 
 
 
@@ -205,7 +201,7 @@ class ObjectList(QTreeWidget):
         self.setColumnCount(2)
         self.setHeaderLabels(["Name", "Type"])
         #self.expandToDepth(1)
-        self.connect(self, SIGNAL("itemClicked(QTreeWidgetItem *, int)"), self.clicked)
+        self.itemClicked.connect(self.clicked)
 
 
     def clicked(self, item, col):
@@ -248,10 +244,7 @@ class ObjectExplorer(QDialog):
         ObjectExplorer.instance = self
         self.splitter = QSplitter(self)
         self.objectlist = ObjectList(self.splitter)
-        self.connect(
-            self.objectlist,
-            SIGNAL("itemClicked(QTreeWidgetItem *, int)"),
-            self.object_clicked)
+        self.objectlist.itemClicked.connect(self.object_clicked)
         self.objecttab = ObjectTab(self.splitter)
         self.resize(800, 600)
         self.vlayout = QVBoxLayout(self)

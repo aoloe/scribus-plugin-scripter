@@ -12,7 +12,7 @@ import re
 import os
 from ConfigParser import ConfigParser
 from StringIO import StringIO
-from PyQt4.QtGui import QKeySequence, QIcon
+from PyQt5.QtGui import QKeySequence, QIcon
 
 import excepthook
 from scripter_hooks import MenuHooks

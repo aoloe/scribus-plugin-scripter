@@ -1,5 +1,6 @@
-from PyQt4.QtCore import QTimer, Qt, SIGNAL
-from PyQt4.QtGui import QTextBrowser, QVBoxLayout, QListWidget, qApp, QListWidgetItem, QWidget
+from PyQt5.QtCore import QTimer, Qt
+from PyQt5.QtWidgets import (qApp, QListWidget, QListWidgetItem, QTextBrowser,
+                             QVBoxLayout, QWidget)
 
 
 class PopupWidget(QWidget):
@@ -83,9 +84,7 @@ class AutoComplete(PopupWidget):
 
     def init_popup(self):
         self.list = QListWidget(self)
-        self.connect(self.list,
-                     SIGNAL("itemClicked(QListWidgetItem*)"),
-                     self.insertItem)
+        self.list.itemClicked.connect(self.insertItem)
         self.layout().addWidget(self.list)
         self.items = []
 

@@ -1,8 +1,7 @@
 ## title = Get help on Scripter
 ## menu = &Help
 ## separator_before = True
-from PyQt4.QtCore import *
-from PyQt4.QtGui import *
+from PyQt5.QtCore import *
 
 URL = "http://scribus-scripter.readthedocs.org"
 

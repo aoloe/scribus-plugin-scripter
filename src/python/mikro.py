@@ -9,10 +9,11 @@ you have to know about metaclasses in Python
 from __future__ import (print_function, with_statement)
 
 import sip
-from PyQt4.QtCore import (
-    QMetaObject, Q_RETURN_ARG, QString, Q_ARG,  
-    QObject, QVariant, Qt, SIGNAL, QMetaMethod)
-from PyQt4.QtGui import QBrush, QFont, QPixmap, qApp, QImage, QPalette
+from PyQt5.QtCore import (
+    QMetaObject, Q_RETURN_ARG, Q_ARG,
+    QObject, QVariant, Qt, QMetaMethod)
+from PyQt5.QtGui import QBrush, QFont, QImage, QPalette, QPixmap
+from PyQt5.QtWidgets import qApp
 
 
 variant_converter = {
@@ -23,7 +24,6 @@ variant_converter = {
   "double": lambda v: v.toDouble()[0],
   "char": lambda v: v.toChar(),
   "QByteArray": lambda v: v.toByteArray(),
-  "QString": lambda v: unicode(v.toString()),
   "QPoint": lambda v: v.toPoint(),
   "QPointF": lambda v: v.toPointF(),
   "QSize": lambda v: v.toSize(),
@@ -86,11 +86,11 @@ def supercast(obj):
     """
     if not qtclasses:
         # To get really all Qt classes I would have to 
-        # import QtNetwork, QtXml, QtSvg and QtScript, too.
-        import PyQt4
+        # import QtNetwork, QtSvg and QtQml, too.
+        import PyQt5
         qtclasses.update(
             dict([(key, value) \
-                for key, value in PyQt4.QtCore.__dict__.items() + PyQt4.QtGui.__dict__.items() \
+                for key, value in PyQt5.QtCore.__dict__.items() + PyQt5.QtGui.__dict__.items() \
                 if hasattr(value, "__subclasses__") and issubclass(value, QObject)])
         )
     try:
@@ -119,10 +119,7 @@ def wrap(obj, force=False):
     which queries the metaObject and provides access to 
     all slots and all properties.
     """
-    if isinstance(obj, QString):
-        # prefer Python strings
-        return unicode(obj)
-    elif isinstance(obj, PyQtClass):
+    if isinstance(obj, PyQtClass):
         # already wrapped
         return obj
     if obj and isinstance(obj, QObject):
@@ -232,11 +229,11 @@ class PyQtClass(object):
 
 
     def connect(self, signal, slot):
-        self._instance.connect(self._instance, SIGNAL(signal), slot)
+        getattr(self._instance, signal).connect(slot)
 
 
     def disconnect(self, signal, slot):
-        self._instance.disconnect(self._instance, SIGNAL(signal), slot)
+        getattr(self._instance, signal).disconnect(slot)
 
 
     def parent(self):
@@ -268,7 +265,7 @@ class PyQtClass(object):
 
 
     def __getattr__(self, name):
-        # Make named child objects available as attributes like QtScript
+        # Make named child objects available as attributes like QtQml
         for child in self._instance.children():
             if str(child.objectName()) == name:
                 obj = wrap(child)
@@ -343,7 +340,7 @@ class PyQtMethod(object):
 
     def __init__(self, meta_method):
         self.meta_method = meta_method
-        self.name, args = str(meta_method.signature()).split("(", 1)
+        self.name, args = str(meta_method.methodSignature()).split("(", 1)
         self.args = args[:-1].split(",")
         self.returnType = str(meta_method.typeName())
 
@@ -436,7 +433,7 @@ def create_pyqt_object(obj):
      @type obj:  QObject
      @param obj: an unwrapped QObject
      @rtype:     PyQtClass object
-     @return:    dynamicaly created object with all available properties and slots
+     @return:    dynamically created object with all available properties and slots
      
      This is probably the only function you need from this module. 
      Everything else are helper functions and classes. 
