@@ -1,24 +1,26 @@
 # Add path of init_scripter to Python module search path
+from __future__ import print_function
+
 import sys, os
 scripter_path = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, scripter_path)
-print >> sys.stderr, "%s added to PYTHONPATH" % scripter_path
+print("%s added to PYTHONPATH" % scripter_path, file=sys.stderr)
 
 # Look for PyQt
 try:
     from PyQt4.QtCore import PYQT_VERSION_STR,  QObject,  QCoreApplication
     from PyQt4.QtGui import qApp,  QMenu
 except ImportError:
-    print >> sys.stderr, "Python cannot find the Qt4 bindings."
-    print >> sys.stderr, "Please make sure, that the needed packages are installed."
-    print >> sys.stderr, "On Ubuntu and Debian(-like) distributions you have to install python-qt4"
+    print("Python cannot find the Qt4 bindings.", file=sys.stderr)
+    print("Please make sure, that the needed packages are installed.", file=sys.stderr)
+    print("On Ubuntu and Debian(-like) distributions you have to install python-qt4", file=sys.stderr)
     raise
 try:
     from PyQt4 import QtScript
-except ImportError, e:
-    print >> sys.stderr, "You seem to have Qt4 bindings without QtScript support."
-    print >> sys.stderr, "This is currently a requirement."
-    print >> sys.stderr, "Please make sure you have also libqt4-script installed."
+except ImportError as e:
+    print("You seem to have Qt4 bindings without QtScript support.", file=sys.stderr)
+    print("This is currently a requirement.", file=sys.stderr)
+    print("Please make sure you have also libqt4-script installed.", file=sys.stderr)
     raise
 
 # Shows nice looking error dialog if an unhandled exception occures.
@@ -28,9 +30,9 @@ excepthook.install()
 
 # Make sure PyQt is new enough
 if float(PYQT_VERSION_STR[:3]) < 4.4:
-    print >> sys.stderr, "Your installed PyQt4 is older than version 4.4"
-    print >> sys.stderr, "A newer version is needed. Please upgrade your packages."
-    raise ImportError, "PyQt4 not new enough"
+    print("Your installed PyQt4 is older than version 4.4", file=sys.stderr)
+    print("A newer version is needed. Please upgrade your packages.", file=sys.stderr)
+    raise ImportError("PyQt4 not new enough")
 
 # Import helper modules
 from scripter_hooks import MenuHooks

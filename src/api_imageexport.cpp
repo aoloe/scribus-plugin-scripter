@@ -4,6 +4,8 @@ to the COPYING file provided with the program. Following this notice may exist
 a copyright and/or license notice that predates the release of Scribus 1.3.2
 for which a new license (GPL+exception) is in place.
 */
+#include <Python.h>
+
 #include "api_imageexport.h"
 #include "scribusview.h"
 #include "utils.h"
@@ -112,7 +114,6 @@ QString ImageExport::getFileName(ScribusDoc* doc, uint pageNr)
 
 bool ImageExport::exportPage(ScribusDoc* doc, uint pageNr, bool single = true)
 {
-	uint over   = 0;
 	bool saved = false, doFileSave = true;
 	QString fileName(getFileName(doc, pageNr));
 
@@ -134,7 +135,7 @@ bool ImageExport::exportPage(ScribusDoc* doc, uint pageNr, bool single = true)
 	int dpm = qRound(100.0 / 2.54 * _dpi);
 	im.setDotsPerMeterY(dpm);
 	im.setDotsPerMeterX(dpm);
-	if (QFile::exists(fileName) && !overwrite)
+	if (QFile::exists(fileName) && !_overwrite)
 	{
 		RAISE("File exists and overwrite is set to false");
 	}

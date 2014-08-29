@@ -124,7 +124,7 @@ class MenuHooks(object):
             title = menu
             menu = self.findMenu(title)
             if not menu:
-                raise ValueError, "Menu %r not found" % title
+                raise ValueError("Menu %r not found" % title)
         if isinstance(item, QMenu): 
             action = menu.addMenu(item)
         else:

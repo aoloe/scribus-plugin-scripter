@@ -4,6 +4,8 @@ Python and QtScript scripts inside Scribus.
 
 Look at run_filename for details.
 """
+from __future__ import print_function
+
 import os
 import hashlib
 from ConfigParser import ConfigParser
@@ -57,7 +59,7 @@ class RuntimeConfig(ConfigParser):
         elif value and value in ["false", "off", "no", "0"]:
             return False
         else:
-            raise ValueError, "Invalid boolean value %r" % value
+            raise ValueError("Invalid boolean value %r" % value)
 
 
 runtime_config = RuntimeConfig()
@@ -83,7 +85,7 @@ def qts_func_decorator(func):
             args.append(context.argument(i))
         try:
             result = func(*args)
-        except Exception, e:
+        except Exception as e:
             # XXX correct behaviour?
             # http://lists.trolltech.com/qt-interest/2007-06/thread00892-0.html
             return context.throwValue(QScriptValue(engine, str(e)))
@@ -177,7 +179,7 @@ def check_python(filename):
         elif ok == 1: # allow but now remember
             pass
         else:
-            raise ValueError, "Inknown return code for permission dialog: %r" % ok
+            raise ValueError("Inknown return code for permission dialog: %r" % ok)
     return True
 
 
@@ -242,9 +244,9 @@ def cleanup():
         if hasattr(child, "qt"): child = child.qt
         v = child.property("keep")
         if v and v.toBool() == True:
-            #print "Keeping", child
+            #print("Keeping", child)
             continue
-        print "* deleting collected", child
+        print("* deleting collected", child)
         sip.delete(child)
 
 

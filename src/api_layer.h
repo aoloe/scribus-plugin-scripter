@@ -7,6 +7,8 @@ for which a new license (GPL+exception) is in place.
 #ifndef API_LAYER_H_
 #define API_LAYER_H_
 
+#include <Python.h>
+
 #include <QObject>
 #include <QtDebug>
 #include <QApplication>

@@ -192,7 +192,7 @@ class EditorMainWindow(QMainWindow):
                 namespace = {}
             try:
                 exec code in namespace
-            except Exception, e:
+            except Exception as e:
                 traceback.print_exc()
             try:
                 Scripter.activeWindow.redraw = True

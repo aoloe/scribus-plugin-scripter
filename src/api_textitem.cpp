@@ -4,6 +4,8 @@ to the COPYING file provided with the program. Following this notice may exist
 a copyright and/or license notice that predates the release of Scribus 1.3.2
 for which a new license (GPL+exception) is in place.'
 */
+#include <Python.h>
+
 #include "api_textitem.h"
 #include "units.h"
 #include "scribusdoc.h"
@@ -89,7 +91,7 @@ double TextAPI::fontSize()
 		for (int b = 0; b < item->itemText.length(); b++)
 			if (item->itemText.selected(b))
 				return item->itemText.charStyle(b).fontSize() / 10.0;
-		return NULL;
+		return 0.0;
 	}
 	else
 	{
@@ -450,6 +452,7 @@ bool TextAPI::deleteText()
 		//	ScCore->primaryMainWindow()->doc->FrameItems.at(a)->ItemNr = a;
 		//}TODO fix this,
 	}
+	return false; // probably...
 }
 
 bool TextAPI::traceText()

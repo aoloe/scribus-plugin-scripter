@@ -7,6 +7,8 @@ for which a new license (GPL+exception) is in place.
 #ifndef SCRIPTER_H
 #define SCRIPTER_H
 
+#include <Python.h>
+
 #include "pluginapi.h"
 #include "scplugin.h"
 #include <scripterimpl.h>

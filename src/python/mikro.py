@@ -6,7 +6,8 @@ Via the Qt meta object system it provides access to unwrapped objects.
 This code uses a lot of metaprogramming magic. To fully understand it,
 you have to know about metaclasses in Python
 """
-from __future__ import with_statement
+from __future__ import (print_function, with_statement)
+
 import sip
 from PyQt4.QtCore import (
     QMetaObject, Q_RETURN_ARG, QString, Q_ARG,  
@@ -71,7 +72,7 @@ def from_variant(variant):
     typeName = variant.typeName()
     convert = variant_converter.get(typeName)
     if not convert:
-        raise ValueError, "Could not convert value to %s" % typeName
+        raise ValueError("Could not convert value to %s" % typeName)
     else: 
         return convert(variant)
 
@@ -201,13 +202,13 @@ class PyQtClass(object):
         qobj = self._instance
         if is_scripter_child(qobj):
             if len(qobj.children()):
-                print "Cannot delete", qobj, "because it has child objects"
+                print("Cannot delete", qobj, "because it has child objects")
             #else:
-            #    print "* deleting", qobj
+            #    print("* deleting", qobj)
             # XXX: or better setdeleted ?
             sip.delete(qobj)
         #else:
-        #    print "* NOT deleting", qobj
+        #    print("* NOT deleting", qobj)
 
         
     def setProperty(self, name, value):
@@ -258,8 +259,8 @@ class PyQtClass(object):
                 # array protocol
                 try:
                     return getattr(self, str(key))
-                except AttributeError, e:
-                    raise IndexError, key
+                except AttributeError as e:
+                    raise IndexError(key)
             else:
                 return self.children()[key]
         else:
@@ -278,7 +279,7 @@ class PyQtClass(object):
         variant = self._instance.property(name)
         if variant.type() != 0:
             return from_variant(variant)
-        raise AttributeError, name
+        raise AttributeError(name)
 
 
     @property
@@ -300,11 +301,11 @@ class PyQtClass(object):
 
     
     def __enter__(self):
-        print "__enter__", self
+        print("__enter__", self)
         
         
     def __exit__(self, exc_type, exc_value, traceback):
-        print "__exit__", self, exc_type, exc_value, traceback
+        print("__exit__", self, exc_type, exc_value, traceback)
         
 
 
@@ -373,10 +374,10 @@ class PyQtMethod(object):
                 if error_msg:
                     # clear message
                     qApp.setProperty("MIKRO_EXCEPTION", QVariant())
-                    raise Error(error_msg)
-            except RuntimeError, e:
-                raise TypeError, \
-                    "%s.%s(%r) call failed: %s" % (obj, self.name, args, e)
+                    raise Exception(error_msg)
+            except RuntimeError as e:
+                raise TypeError(
+                    "%s.%s(%r) call failed: %s" % (obj, self.name, args, e))
             return wrap(result)
         wrapper.__doc__ = self.__doc__
         return wrapper

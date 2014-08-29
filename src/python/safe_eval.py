@@ -31,6 +31,7 @@ entries
 I have removed the timeout checking as this probably isn't a serious
 problem for veusz documents
 """
+from __future__ import print_function
 
 import parser
 import inspect, compiler.ast
@@ -273,10 +274,10 @@ class SafeEvalVisitor(object):
 
     def trace(self, node):
         "Debugging utility for tracing the validation of AST nodes."
-        print classname(node)
+        print(classname(node))
         for attr in dir(node):
             if attr[:2] != '__':
-                print ' ' * 4, "%-15.15s" % attr, getattr(node, attr)
+                print(' ' * 4, "%-15.15s" % attr, getattr(node, attr))
 
 ##########################################################################
 # Veusz evaluation functions
@@ -320,7 +321,7 @@ def checkCode(code):
     
     try:
         ast = compiler.parse(code)
-    except SyntaxError, e:
+    except SyntaxError as e:
         return [e]
     checker = SafeEvalVisitor()
 
@@ -467,7 +468,7 @@ class TestSafeEval(unittest.TestCase):
     def test_func_globals(self):
         # attempt to access global enviroment where fun was defined
         self.assertRaises(SafeEvalException, \
-            timed_safe_eval, "def x(): pass; print x.func_globals")
+            timed_safe_eval, "def x(): pass; print(x.func_globals)")
 
     def test_lowlevel(self):
         # lowlevel tricks to access 'object'
@@ -489,7 +490,7 @@ class TestSafeEval(unittest.TestCase):
         # can't pass an enviroment with modules or builtins
         env = {'f' : __builtins__.open, 'g' : time}
         self.assertRaises(SafeEvalException, \
-            timed_safe_eval, "print 1", env)
+            timed_safe_eval, "print(1)", env)
 
     def test_callback(self):
         # modify local variable via callback

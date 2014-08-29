@@ -4,6 +4,8 @@ to the COPYING file provided with the program. Following this notice may exist
 a copyright and/or license notice that predates the release of Scribus 1.3.2
 for which a new license (GPL+exception) is in place.
 */
+#include <Python.h>
+
 #include <QImageWriter>
 
 #include "api_document.h"
@@ -112,7 +114,7 @@ void DocumentAPI::setUnit(int value)
 
 int DocumentAPI::unit()
 {
-	if (!check()) return NULL;
+	if (!check()) return -1;
 	return ScCore->primaryMainWindow()->doc->unitIndex();
 }
 

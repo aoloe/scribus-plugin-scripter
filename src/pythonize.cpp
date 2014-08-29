@@ -16,11 +16,10 @@
    Boston, MA 02110-1301, USA.
 */
 
+#include <Python.h>
+
 #include <stdarg.h>
 #include <string.h>
-
-// this just gets rid of a warning when Python.h redefines it
-#undef _POSIX_C_SOURCE
 
 #include <pythonize.h>
 
@@ -42,8 +41,8 @@ Pythonize::Pythonize ()
 
     if (!Py_IsInitialized ())
     {
-        PyEval_InitThreads ();
         Py_Initialize ();
+        PyEval_InitThreads ();
         if (!Py_IsInitialized ())
         {
             pythonInit = 0;
@@ -51,9 +50,6 @@ Pythonize::Pythonize ()
         }
 
         if (debug) printf ("Python interpreter initialized!\n\n");
-
-        // free the lock
-        PyEval_ReleaseLock();
     }
 }
 
@@ -114,7 +110,7 @@ bool Pythonize::appendToSysPath (const char* newPath)
 {
     if (newPath == NULL || strlen (newPath) == 0) return false;
 
-    char *fmtString = "import sys\nif not '%s' in sys.path:\n\tsys.path.append ('%s')\n"; //print sys.path\n";
+    const char *fmtString = "import sys\nif not '%s' in sys.path:\n\tsys.path.append ('%s')\n"; //print sys.path\n";
     int length      = strlen (fmtString) + 2*strlen (newPath) + 1;
     char *line      =  new char [length];
     if (!line) return false;

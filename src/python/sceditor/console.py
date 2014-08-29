@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import sys
 import traceback
 import re
@@ -69,7 +71,7 @@ class ConsoleWidget(OutputWidget):
         self.history_index = 0
         self.history = [""]
         self.tab_state = -1
-        print self.ps1,
+        print(self.ps1, end='')
 
 
     def focusInEvent(self, event):
@@ -104,40 +106,40 @@ class ConsoleWidget(OutputWidget):
             if self.history_index + 1 < len(self.history):
                 self.history_index += 1
             remove_line()
-            print
-            print ps1orps2, self.history[self.history_index],
+            print()
+            print(ps1orps2, self.history[self.history_index], end='')
         elif key == Qt.Key_Down:
             if self.history_index > 0:
                 self.history_index -= 1
             remove_line()
-            print
-            print ps1orps2, self.history[self.history_index],
+            print()
+            print(ps1orps2, self.history[self.history_index], end='')
         elif key == Qt.Key_Tab:
             if modifiers & Qt.ControlModifier:
-                print " " * 4,
+                print(" " * 4, end='')
             else:
                 self.tab_state += 1
                 remove_line()
-                print
-                print ps1orps2, 
-                print self.completer.complete(line, self.tab_state) or line,
+                print()
+                print(ps1orps2, end='')
+                print(self.completer.complete(line, self.tab_state) or line, end='')
         elif key == Qt.Key_Backtab:
             if self.tab_state >= 0:
                 self.tab_state -= 1
             remove_line()
-            print
-            print ps1orps2, 
-            print self.completer.complete(line, self.tab_state) or line,
+            print()
+            print(ps1orps2, end='')
+            print(self.completer.complete(line, self.tab_state) or line, end='')
         elif key in [Qt.Key_Backspace, Qt.Key_Left]:
             if self.textCursor().columnNumber()  > len(ps1orps2) + 1:
                 return OutputWidget.keyPressEvent(self, event)
         elif key == Qt.Key_Return:
             self.moveCursor(QTextCursor.EndOfLine,  QTextCursor.MoveAnchor)
-            print
+            print()
             if self.push(line):
-                print self.ps2,
+                print(self.ps2, end='')
             else:
-                print self.ps1,
+                print(self.ps1, end='')
             if line and line != self.history[self.history_index]:
                 self.history.insert(1, line)
             self.history_index = 0
@@ -183,7 +185,7 @@ class PythonInterpreter(object):
         try:
             code = compile(line, self.name, "single")
             self.lines = []
-        except SyntaxError, why:
+        except SyntaxError as why:
             if why[0] == "unexpected EOF while parsing":
                 self.lines.append(line)
                 return 1 # want more!
@@ -206,12 +208,12 @@ class PythonInterpreter(object):
     def showtraceback(self):
         self.lines = []
         if sys.exc_type == SyntaxError: # and len(sys.exc_value) == 2:
-            print "  File \"%s\", line %d" % (self.name, sys.exc_value[1][1])
-            print " " * (sys.exc_value[1][2] + 2) + "^"
-            print str(sys.exc_type) + ":", sys.exc_value[0]
+            print("  File \"%s\", line %d" % (self.name, sys.exc_value[1][1]))
+            print(" " * (sys.exc_value[1][2] + 2) + "^")
+            print(str(sys.exc_type) + ":", sys.exc_value[0])
         else:
             traceback.print_tb(sys.exc_traceback, None)
-            print sys.exc_type.__name__ + ":", sys.exc_value
+            print(sys.exc_type.__name__ + ":", sys.exc_value)
 
 
 
@@ -287,8 +289,8 @@ class PythonConsole(ConsoleWidget):
         self.inter = PythonInterpreter(locals=namespace)
         self.namespace = self.inter.locals
         self.completer = PythonCompleter(self.namespace)
-        #print "Python", sys.version
-        #print "Autocomplete with (Shift+)Tab, insert spaces with Ctrl+Tab"
+        #print("Python", sys.version)
+        #print("Autocomplete with (Shift+)Tab, insert spaces with Ctrl+Tab")
         self.push("pass")
 
         
@@ -338,12 +340,12 @@ class QtScriptInterpreter(object):
         except: pass
         if engine.hasUncaughtException():
             bt = engine.uncaughtExceptionBacktrace()
-            print "Traceback:"
-            print "\n".join(["  %s" % l for l in list(bt)])
-            print engine.uncaughtException().toString()
+            print("Traceback:")
+            print("\n".join(["  %s" % l for l in list(bt)]))
+            print(engine.uncaughtException().toString())
         else:
             if not result.isUndefined():
-                print result.toString()
+                print(result.toString())
         
 
     def push(self, line):
@@ -481,8 +483,8 @@ class QtScriptConsole(ConsoleWidget):
         namespace = namespace or {}
         def console_print(context, engine):
             for i in range(context.argumentCount()):
-                print context.argument(i).toString(),
-            print
+                print(context.argument(i).toString(), end='')
+            print()
             return QScriptValue()
         def dir_context(context, engine):
             if context.argumentCount() == 0:

@@ -41,7 +41,7 @@ class MethodItem(QTreeWidgetItem):
                 args = eval(value, __main__.__dict__)
                 if not isinstance(args, tuple):
                     args = (args,)
-            except Exception, e:
+            except Exception as e:
                 QMessageBox.warning(qApp.activeWindow(), "Error evaluating input", str(e))
                 return
         else:
@@ -134,7 +134,7 @@ class PropertyItem(QTreeWidgetItem):
                 return
             try:
                 value = eval(str(value), __main__.__dict__)
-            except Exception, e:
+            except Exception as e:
                 QMessageBox.warning(qApp.activeWindow(), "Error evaluating input", str(e))
                 return
             obj = mikro.wrap(self.obj, True)

@@ -7,6 +7,8 @@ for which a new license (GPL+exception) is in place.
 #ifndef API_IMAGEEXPORT_H_
 #define API_IMAGEEXPORT_H_
 
+#include <Python.h>
+
 #include <QObject>
 #include <QtDebug>
 #include <QApplication>
