@@ -60,8 +60,6 @@ class ExceptHookDialog(QDialog):
         if title:
             self.setWindowTitle(self.windowTitle() + ": " + title)
         self.ui.detailsButton.setCheckable(True)
-        self.setExtension(self.ui.tracebackBrowser)
-        self.setOrientation(Qt.Vertical)
         msg = "%s: %s" % (exc_type.__name__, exc_obj)
         self.ui.exceptionLabel.setText(msg)
         html = cgitb.html((exc_type, exc_obj, exc_tb))
