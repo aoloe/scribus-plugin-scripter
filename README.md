@@ -28,6 +28,12 @@ to
 
     FIND_PACKAGE(PythonLibs REQUIRED)
 
+or 
+
+    FIND_PACKAGE(PythonLibs 3 REQUIRED)
+
+(not sure yet, which one is the right one)
+
 and re-run cmake.
 
 ## Notes
