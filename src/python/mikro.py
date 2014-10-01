@@ -20,6 +20,7 @@ variant_converter = {
   # XXX QList<type>, QMap<*>, longlong
   "QVariantList": lambda v: from_variantlist(v),
   "QList<QVariant>": lambda v: v.toList(),
+  "str": lambda v: unicode(v.toString()),
   "int": lambda v: v.toInt()[0],
   "double": lambda v: v.toDouble()[0],
   "char": lambda v: v.toChar(),
@@ -229,6 +230,8 @@ class PyQtClass(object):
 
 
     def connect(self, signal, slot):
+        # TODO: check for qt5 signals and reflection
+        import pdb; pdb.set_trace()
         getattr(self._instance, signal).connect(slot)
 
 
@@ -273,6 +276,7 @@ class PyQtClass(object):
                 setattr(self, name, obj) 
                 return obj
         # Dynamic object property?
+        # import pdb; pdb.set_trace()
         variant = self._instance.property(name)
         if variant.type() != 0:
             return from_variant(variant)
