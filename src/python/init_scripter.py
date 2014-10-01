@@ -94,6 +94,4 @@ class ScripterMenu(QObject):
 def createMenu(mainWindow):
     Scripter.menu = ScripterMenu(mainWindow)
 
-# import pdb; pdb.set_trace()
-Scripter.connect("createMenu(QMainWindow*)", createMenu)
-    
+Scripter.createMenu.connect(createMenu)
