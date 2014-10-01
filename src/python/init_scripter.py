@@ -6,6 +6,8 @@ scripter_path = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, scripter_path)
 print("%s added to PYTHONPATH" % scripter_path, file=sys.stderr)
 
+# print("python version: %s" % sys.version)
+
 # Look for PyQt
 try:
     from PyQt5.QtCore import PYQT_VERSION_STR,  QObject,  QCoreApplication
@@ -40,12 +42,12 @@ from mikro import create_pyqt_object, Error as MiKroError
 
 
 # Scripter and i18n should be available everywhere globally
-import __builtin__
-__builtin__.Scripter = create_pyqt_object(qApp).Scripter
+import builtins
+builtins.Scripter = create_pyqt_object(qApp).Scripter
 Scripter.qt.setParent(None)
 
-__builtin__.app = Scripter # shorter name for lazy people
-__builtin__.i18n = lambda s: unicode(QCoreApplication.translate("Scripter", s))
+builtins.app = Scripter # shorter name for lazy people
+builtins.i18n = lambda s: unicode(QCoreApplication.translate("Scripter", s))
 Scripter.Error = MiKroError
 Scripter.path = scripter_path
 
@@ -92,5 +94,6 @@ class ScripterMenu(QObject):
 def createMenu(mainWindow):
     Scripter.menu = ScripterMenu(mainWindow)
 
+# import pdb; pdb.set_trace()
 Scripter.connect("createMenu(QMainWindow*)", createMenu)
     
