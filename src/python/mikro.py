@@ -11,16 +11,16 @@ from __future__ import (print_function, with_statement)
 import sip
 from PyQt5.QtCore import (
     QMetaObject, Q_RETURN_ARG, Q_ARG,
-    QObject, QVariant, Qt, QMetaMethod)
+    QObject, Qt, QMetaMethod, pyqtSignal)
 from PyQt5.QtGui import QBrush, QFont, QImage, QPalette, QPixmap
 from PyQt5.QtWidgets import qApp
 
+import sys # TODO: remove this: only for outputting debug
 
 variant_converter = {
   # XXX QList<type>, QMap<*>, longlong
-  "QVariantList": lambda v: from_variantlist(v),
-  "QList<QVariant>": lambda v: v.toList(),
-  "str": lambda v: unicode(v.toString()),
+  "QPoint": lambda v: v.toPoint(),
+  "str": lambda v: v.toString(),
   "int": lambda v: v.toInt()[0],
   "double": lambda v: v.toDouble()[0],
   "char": lambda v: v.toChar(),
@@ -46,16 +46,6 @@ variant_converter = {
   "QWidget*": lambda v: Scripter.fromVariant(v),
 }
 
-
-
-def from_variantlist(variantlist):
-    """
-    convert QList<QVariant> to a normal Python list
-    """
-    return [from_variant(variant) for variant in variantlist.toList()]
-
-
-
 def classname(obj):
     """
     return real class name
@@ -63,21 +53,6 @@ def classname(obj):
     So obj.__class__.__name__ will not return the desired class name
     """
     return obj.metaObject().className()
-
-
-
-def from_variant(variant):
-    """
-    convert a QVariant to a Python value
-    """
-    typeName = variant.typeName()
-    convert = variant_converter.get(typeName)
-    if not convert:
-        raise ValueError("Could not convert value to %s" % typeName)
-    else: 
-        return convert(variant)
-
-
 
 qtclasses = {}
 
@@ -120,6 +95,9 @@ def wrap(obj, force=False):
     which queries the metaObject and provides access to 
     all slots and all properties.
     """
+    if isinstance(obj, str):
+        # prefer Python strings
+        return unicode(obj)
     if isinstance(obj, PyQtClass):
         # already wrapped
         return obj
@@ -210,7 +188,7 @@ class PyQtClass(object):
 
         
     def setProperty(self, name, value):
-        self._instance.setProperty(name, QVariant(value))
+        self._instance.setProperty(name, value)
 
         
     def getProperty(self, name):
@@ -230,8 +208,6 @@ class PyQtClass(object):
 
 
     def connect(self, signal, slot):
-        # TODO: check for qt5 signals and reflection
-        import pdb; pdb.set_trace()
         getattr(self._instance, signal).connect(slot)
 
 
@@ -278,7 +254,7 @@ class PyQtClass(object):
         # Dynamic object property?
         # import pdb; pdb.set_trace()
         variant = self._instance.property(name)
-        if variant.type() != 0:
+        if not (variant is None or variant.type() is None) :
             return from_variant(variant)
         raise AttributeError(name)
 
@@ -332,7 +308,7 @@ class PyQtProperty(object):
 
 
     def set(self, obj, value):
-        self.meta_property.write(obj._instance, QVariant(value))
+        self.meta_property.write(obj._instance, value)
 
 
 
@@ -374,7 +350,7 @@ class PyQtMethod(object):
                 error_msg = str(qApp.property("MIKRO_EXCEPTION").toString())
                 if error_msg:
                     # clear message
-                    qApp.setProperty("MIKRO_EXCEPTION", QVariant())
+                    qApp.setProperty("MIKRO_EXCEPTION", "") # TODO: "" was QVariant(): check that it's correct (ale/20141002)
                     raise Exception(error_msg)
             except RuntimeError as e:
                 raise TypeError(
@@ -400,6 +376,7 @@ def create_pyqt_class(metaobject):
     properties = attrs["__properties__"] = {}
     for i in range(metaobject.propertyCount()):
         prop = PyQtProperty(metaobject.property(i))
+        #import pdb; pdb.set_trace()
         prop_name = str(prop.name)
         #prop_name = prop_name[0].upper() + prop_name[1:]
         if prop.read_only:
@@ -410,9 +387,10 @@ def create_pyqt_class(metaobject):
                                                       prop.get, prop.set, doc=prop.__doc__)
 
     methods = attrs["__methods__"] = {}
+    signals = attrs["__signals__"] = {}
     for i in range(metaobject.methodCount()):
         meta_method = metaobject.method(i)
-        if meta_method.methodType() != QMetaMethod.Signal:
+        if meta_method.methodType() != QMetaMethod.Signal :
             method = PyQtMethod(meta_method)
             method_name = method.name
             if method_name in attrs:
@@ -422,6 +400,18 @@ def create_pyqt_class(metaobject):
             instance_method = method.instancemethod()
             instance_method.__doc__ = method.__doc__
             methods[method_name] = attrs[method_name] = instance_method 
+        else :
+            method_name = meta_method.name()
+            signal_attrs = []
+            #for i in range(meta_method.parameterCount()):
+            #    typ = meta_method.parameterType(i)
+            #    signal_attrs.append(typ)
+            #import pdb; pdb.set_trace()
+            # TODO: bind the signal (which is now unbound) to the c++ signal (we can bind them signal to signal, if signal to slot does not work)
+            # TODO: make sure that the signal shows up as attribute in the created class
+            properties[bytes(method_name).decode('ascii')] = pyqtSignal(meta_method.parameterTypes())
+
+    # import pdb; pdb.set_trace()
 
     # Python is great :)
     # It can dynamically create a class with a base class and a dictionary

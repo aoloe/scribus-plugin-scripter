@@ -27,7 +27,7 @@ except ImportError as e:
 
 # Shows nice looking error dialog if an unhandled exception occures.
 import excepthook
-excepthook.install()
+# excepthook.install() # TODO: reactivate this... or make it optional if somebody prefers having the exceptions in the console
 
 
 # Make sure PyQt is new enough
@@ -94,4 +94,5 @@ class ScripterMenu(QObject):
 def createMenu(mainWindow):
     Scripter.menu = ScripterMenu(mainWindow)
 
+import pdb; pdb.set_trace()
 Scripter.createMenu.connect(createMenu)
