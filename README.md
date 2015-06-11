@@ -36,6 +36,17 @@ or
 
 and re-run cmake.
 
+## Roadmap
+
+- [ ] check if we want to stay with pythonize
+- [ ] get the signals and slots to be connected accross the c++ / python boundary (or avoid using signals and slots for the communication between scribus and the scripter: is it possible?)
+- [ ] specify the API structure
+- [ ] create a concept for the documentation
+- [ ] create a platform for the documentation
+- [ ] define the full API
+- [ ] implement the missing commands
+- [ ] port the scripts included in Scribus
+
 ## Notes
 
 The error happens in:
