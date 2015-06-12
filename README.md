@@ -41,11 +41,17 @@ and re-run cmake.
 - [ ] check if we want to stay with pythonize
 - [ ] get the signals and slots to be connected accross the c++ / python boundary (or avoid using signals and slots for the communication between scribus and the scripter: is it possible?)
 - [ ] specify the API structure
+  - check http://wiki.scribus.net/canvas/Scripter2_API, somehow describing the new API
 - [ ] create a concept for the documentation
+  - https://scribus-scripter.readthedocs.org already exists
 - [ ] create a platform for the documentation
 - [ ] define the full API
 - [ ] implement the missing commands
+- [ ] remove or fix the scripter console
 - [ ] port the scripts included in Scribus
+  - make a list of classes and function and list their matching old scripter commands
+- [ ] finish the scripts downloader
+- [ ] create a test suite?
 
 ## Notes
 
