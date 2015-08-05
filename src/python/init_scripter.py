@@ -10,7 +10,7 @@ print("%s added to PYTHONPATH" % scripter_path, file=sys.stderr)
 
 # Look for PyQt
 try:
-    from PyQt5.QtCore import PYQT_VERSION_STR,  QObject,  QCoreApplication
+    from PyQt5.QtCore import PYQT_VERSION_STR,  QObject,  QCoreApplication, pyqtSignal, pyqtSlot
     from PyQt5.QtWidgets import qApp, QMenu
 except ImportError:
     print("Python cannot find the Qt5 bindings.", file=sys.stderr)
@@ -89,10 +89,32 @@ class ScripterMenu(QObject):
 
     def addSeparator(self):
         self.popup.addSeparator()
-        
 
-def createMenu(mainWindow):
+"""
+@pyqtSlot()
+def createMenu(self, mainWindow):
     Scripter.menu = ScripterMenu(mainWindow)
+"""
 
-import pdb; pdb.set_trace()
-Scripter.createMenu.connect(createMenu)
+
+# from functools import partial
+
+class ScripterMenuInitializer(QObject):
+
+    createMenuSignal = pyqtSignal()
+
+    def __init__(self):
+        QObject.__init__(self)
+
+    def createMenu(self, mainWindow):
+        Scripter.menu = ScripterMenu(mainWindow)
+
+    def initialize(self):
+        # createMenuFunc = partial(createMenu)
+        #self.createMenu.connect(createMenuFunc)
+        # self.createMenu.connect(createMenu)
+        self.createMenuSignal.connect(self.createMenu)
+    
+# import pdb; pdb.set_trace()
+scripterMenuInitializer = ScripterMenuInitializer()
+scripterMenuInitializer.initialize()
