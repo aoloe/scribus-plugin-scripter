@@ -783,7 +783,7 @@ Margins::Margins(QObject *parent) : QObject(COLLECTOR)
  */
 double Margins::top()
 {
-	return ScCore->primaryMainWindow()->doc->margins()->Top;
+	return ScCore->primaryMainWindow()->doc->margins()->top();
 }
 
 
@@ -795,7 +795,7 @@ double Margins::top()
  */
 double Margins::left()
 {
-	return ScCore->primaryMainWindow()->doc->margins()->Left;
+	return ScCore->primaryMainWindow()->doc->margins()->left();
 }
 
 
@@ -807,7 +807,7 @@ double Margins::left()
  */
 double Margins::right()
 {
-	return ScCore->primaryMainWindow()->doc->margins()->Right;
+	return ScCore->primaryMainWindow()->doc->margins()->right();
 }
 
 
@@ -819,7 +819,7 @@ double Margins::right()
  */
 double Margins::bottom()
 {
-	return ScCore->primaryMainWindow()->doc->margins()->Bottom;
+	return ScCore->primaryMainWindow()->doc->margins()->bottom();
 }
 
 

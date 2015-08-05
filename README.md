@@ -36,6 +36,8 @@ or
 
 and re-run cmake.
 
+on Debian(-like systems) you will have to install the `libpython3.5-dev` package
+
 ## Roadmap
 
 - [ ] check if we want to stay with pythonize
