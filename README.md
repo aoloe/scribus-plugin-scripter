@@ -104,3 +104,4 @@ The next step will to find out which is the offending line.
 - http://stackoverflow.com/questions/17772143/the-difference-between-pyqt-and-qt-when-handling-user-defined-signal-slot
 - http://pyqt.sourceforge.net/Docs/PyQt4/new_style_signals_slots.html
 - https://www.commandprompt.com/community/pyqt/x1408.htm
+- http://enki-editor.org/2014/08/23/Pyqt_mem_mgmt.html
