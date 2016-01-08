@@ -94,3 +94,13 @@ The next step will to find out which is the offending line.
 - http://sourceforge.net/projects/pythonqt/files/pythonqt/
 - https://docs.python.org/2/extending/embedding.html
 - https://wiki.python.org/moin/EmbedingPyQtTutorial
+- http://pyqt.sourceforge.net/Docs/PyQt5/signals_slots.html
+- http://stackoverflow.com/questions/17578428/pyqt5-signals-and-slots-qobject-has-no-attribute-error
+- http://stackoverflow.com/questions/19427963/python-pyqt5-signals-slots
+- http://stackoverflow.com/questions/19966056/pyqt5-how-can-i-connect-a-qpushbutton-to-a-slot
+- http://stackoverflow.com/questions/25329091/pyqt-how-to-access-mainwindow-widgets-from-an-external-function
+- http://blog.abstractfactory.io/dynamic-signals-in-pyqt/
+- https://wiki.python.org/moin/PyQt/simple2
+- http://stackoverflow.com/questions/17772143/the-difference-between-pyqt-and-qt-when-handling-user-defined-signal-slot
+- http://pyqt.sourceforge.net/Docs/PyQt4/new_style_signals_slots.html
+- https://www.commandprompt.com/community/pyqt/x1408.htm
