@@ -314,7 +314,7 @@ void ItemAPI::move(double dx, double dy)
 	}
 	else
 	{
-		ScCore->primaryMainWindow()->doc->MoveItem(ValueToPoint(dx), ValueToPoint(dy), item);
+		ScCore->primaryMainWindow()->doc->moveItem(ValueToPoint(dx), ValueToPoint(dy), item);
 	}
 	// Now restore the selection.
 	ScCore->primaryMainWindow()->view->Deselect();
@@ -348,7 +348,7 @@ void ItemAPI::moveAbs(double x, double y)
 		ScCore->primaryMainWindow()->view->endGroupTransaction();
 	}
 	else
-		ScCore->primaryMainWindow()->doc->MoveItem(pageUnitXToDocX(x) - item->xPos(), pageUnitYToDocY(y) - item->yPos(), item);
+		ScCore->primaryMainWindow()->doc->moveItem(pageUnitXToDocX(x) - item->xPos(), pageUnitYToDocY(y) - item->yPos(), item);
 	// Now restore the selection.
 	ScCore->primaryMainWindow()->view->Deselect();
 	if (hadOrigSelection)
@@ -361,7 +361,7 @@ void ItemAPI::resize(double width, double height)
 		return;
 	if (item == NULL)
 		return;
-	ScCore->primaryMainWindow()->doc->SizeItem(ValueToPoint(width), ValueToPoint(height), item);
+	ScCore->primaryMainWindow()->doc->sizeItem(ValueToPoint(width), ValueToPoint(height), item);
 }
 
 void ItemAPI::rotate(double rot)
@@ -370,7 +370,7 @@ void ItemAPI::rotate(double rot)
 		return;
 	if (item == NULL)
 		return;
-	ScCore->primaryMainWindow()->doc->RotateItem(item->rotation() - rot, item);
+	ScCore->primaryMainWindow()->doc->rotateItem(item->rotation() - rot, item);
 
 }
 void ItemAPI::rotateAbs(double rot)
@@ -379,7 +379,7 @@ void ItemAPI::rotateAbs(double rot)
 		return;
 	if (item == NULL)
 		return;
-	ScCore->primaryMainWindow()->doc->RotateItem(rot * -1.0, item);
+	ScCore->primaryMainWindow()->doc->rotateItem(rot * -1.0, item);
 }
 
 
