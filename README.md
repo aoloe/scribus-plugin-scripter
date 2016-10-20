@@ -26,17 +26,18 @@ To compile against Python 3, you will need to edit the `CMakeLists.txt` in the t
 
 to
 
-    FIND_PACKAGE(PythonLibs REQUIRED)
-
-or 
-
     FIND_PACKAGE(PythonLibs 3 REQUIRED)
 
-(not sure yet, which one is the right one)
+or
+
+    FIND_PACKAGE(PythonLibs REQUIRED)
+
+
+(the first one is probably the right one)
 
 and re-run cmake.
 
-on Debian(-like systems) you will have to install the `libpython3.5-dev` package
+on Debian(-like systems) you will have to install the `libpython3.5-dev`,`python3-pyqt5`, and `python3-pyqt5.qtquick`  packages
 
 ## Roadmap
 
