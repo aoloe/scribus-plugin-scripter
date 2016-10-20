@@ -158,6 +158,10 @@ double PageAPI::pageYtoDocY(double y)
 	return y + ScCore->primaryMainWindow()->doc->currentPage()->yOffset();
 }
 
+/**
+ * TODO: newItem's last paramenter is of type PageItem::ItemKind and has
+ * a default value: check if it should be set here. (ale/20161020)
+ */
 PageItem *PageAPI::newItem(const PageItem::ItemType itemType,
                           const PageItem::ItemFrameType frameType,
                           const double x, const double y, const double width,
@@ -168,7 +172,7 @@ PageItem *PageAPI::newItem(const PageItem::ItemType itemType,
 	            itemType, frameType,
 	            pageXtoDocX(x), pageYtoDocY(y),
 	            width, height,
-	            w, fill, outline, true);
+	            w, fill, outline);
 	return ScCore->primaryMainWindow()->doc->Items->at(i);
 }
 
