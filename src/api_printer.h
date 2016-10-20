@@ -24,7 +24,6 @@ class PrinterAPI : public QObject
     Q_PROPERTY(QString separation READ getSeparation WRITE setSeparation)
     Q_PROPERTY(QList<QVariant> pages READ getPages WRITE setPages)
     Q_PROPERTY(bool color READ isColor WRITE setColor)
-    Q_PROPERTY(bool useICC READ getUseICC WRITE setUseICC)
     Q_PROPERTY(int psLevel READ getPsLevel WRITE setPsLevel)
     Q_PROPERTY(bool mph READ getMph WRITE setMph)
     Q_PROPERTY(bool mpv READ getMpv WRITE setMpv)
@@ -56,9 +55,6 @@ private:
 	bool isColor();
 	void setColor(bool value);
 	
-	bool getUseICC();
-	void setUseICC(bool value);
-	
 	int getPsLevel();
 	void setPsLevel(int value);
 	
@@ -78,7 +74,6 @@ private:
 	int copies;
 	QString separation;
 	bool color;
-	bool useICC;
 	int pslevel;
 	bool mph;
 	bool mpv;

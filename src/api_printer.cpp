@@ -4,6 +4,13 @@ to the COPYING file provided with the program. Following this notice may exist
 a copyright and/or license notice that predates the release of Scribus 1.3.2
 for which a new license (GPL+exception) is in place.
 */
+
+/*
+ * TODO:
+ * - We should probably remove this class.
+ *   We don't want people to print from the scripter (and generally
+ *   from Scribus): they should produce a PDF instead.
+ */
 #include <Python.h>
 
 #include "api_printer.h"
@@ -28,7 +35,6 @@ PrinterAPI::PrinterAPI() : QObject(COLLECTOR)
 	printer = QString("File");
 	cmd = QString("");
 	color = true;
-	useICC = false;
 	mph = false;
 	mpv = false;
 	ucr = true;
@@ -96,7 +102,6 @@ void PrinterAPI::doPrint()
 	options.useColor = color;
 	options.mirrorH  = mph;
 	options.mirrorV  = mpv;
-	options.useICC   = useICC;
 	options.doGCR    = ucr;
 	options.cropMarks  = false;
 	options.bleedMarks = false;
@@ -260,16 +265,6 @@ bool PrinterAPI::isColor()
 void PrinterAPI::setColor(bool value)
 {
 	this->color = value;
-}
-
-bool PrinterAPI::getUseICC()
-{
-	return this->useICC;
-}
-
-void PrinterAPI::setUseICC(bool value)
-{
-	this->useICC = value;
 }
 
 int PrinterAPI::getPsLevel()
