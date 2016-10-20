@@ -90,31 +90,8 @@ class ScripterMenu(QObject):
     def addSeparator(self):
         self.popup.addSeparator()
 
-"""
-@pyqtSlot()
 def createMenu(self, mainWindow):
     Scripter.menu = ScripterMenu(mainWindow)
-"""
 
+Scripter.connect("createMenu(QMainWindow*)", createMenu)
 
-# from functools import partial
-
-class ScripterMenuInitializer(QObject):
-
-    createMenuSignal = pyqtSignal()
-
-    def __init__(self):
-        QObject.__init__(self)
-
-    def createMenu(self, mainWindow):
-        Scripter.menu = ScripterMenu(mainWindow)
-
-    def initialize(self):
-        # createMenuFunc = partial(createMenu)
-        #self.createMenu.connect(createMenuFunc)
-        # self.createMenu.connect(createMenu)
-        self.createMenuSignal.connect(self.createMenu)
-    
-# import pdb; pdb.set_trace()
-scripterMenuInitializer = ScripterMenuInitializer()
-scripterMenuInitializer.initialize()
