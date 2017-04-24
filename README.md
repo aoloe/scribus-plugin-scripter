@@ -96,6 +96,7 @@ The next step will to find out which is the offending line.
 - https://docs.python.org/2/extending/embedding.html
 - https://wiki.python.org/moin/EmbedingPyQtTutorial
 - http://pyqt.sourceforge.net/Docs/PyQt5/signals_slots.html
+- http://pyqt.sourceforge.net/Docs/PyQt5/signals_slots.html#connecting-slots-by-name
 - http://stackoverflow.com/questions/17578428/pyqt5-signals-and-slots-qobject-has-no-attribute-error
 - http://stackoverflow.com/questions/19427963/python-pyqt5-signals-slots
 - http://stackoverflow.com/questions/19966056/pyqt5-how-can-i-connect-a-qpushbutton-to-a-slot
